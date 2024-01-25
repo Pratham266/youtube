@@ -4,7 +4,7 @@ import { isValidEmail, isValidPassword } from "../Js/Validator";
 import ErrorAtEntryField from "../Components/ErrorAtEntryField";
 import axios from "axios";
 import { BackendUrl } from "../constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../redux";
 
@@ -52,7 +52,7 @@ const Login = () => {
     if (!validPassword) {
       setError(
         "password",
-        "Create Strong Password"
+        "Password is not valid"
       );
     }
     
@@ -105,9 +105,11 @@ const Login = () => {
           </button>
         </div>
       </form>
-
-      
+      <div className="mt-2">
+        <p>Don't have an account yet! <Link to="/signup" style={{fontStyle:"italic"}}>Create Account</Link></p>
       </div>
+      </div>
+      
     </div>
   );
 };

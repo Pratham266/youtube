@@ -13,7 +13,7 @@ const Details = () => {
     <div className="p-2 w-75 border m-2 border-dark bg-primary">
       {!dataId ? (
         <>
-          <h1>Please select first!</h1>
+          <h1 className="text-white">Please select first!</h1>
         </>
       ) : (
         <>
