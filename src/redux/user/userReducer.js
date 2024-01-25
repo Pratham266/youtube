@@ -1,4 +1,4 @@
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, USER_LOGIN, USER_SIGNUP } from "./userTypes"
+import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS} from "./userTypes"
 
 const initialState = {
     loading:false,

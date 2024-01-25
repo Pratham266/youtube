@@ -1,12 +1,9 @@
 import axios from "axios"
 import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./userTypes"
-import { BackendUrl } from "../../constants"
+import { BackendUrl, config } from "../../constants"
 import Cookies from "js-cookie";
 
-const config = {
-    headers: {"Content-Type": "application/json"},
-    withCredentials: true,
-};
+
 
 export const fetchUserRequest=()=>{
     return{
@@ -29,6 +26,7 @@ export const fetchUserFailure=(error)=>{
 }
 
 export const userSignup=(signupData,navigate)=>{
+    
     return (dispatch)=>{
         dispatch(fetchUserRequest)
         axios.post(`${BackendUrl}/api/auth/signup`,signupData,{

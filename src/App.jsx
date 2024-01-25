@@ -13,6 +13,7 @@ function App() {
       <Navbar/>
         <Routes>
           <Route exact path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
+          <Route exact path="/:dataId" element={<PrivateRoute><Home/></PrivateRoute>}/>
           <Route exact path="/about" element={<PrivateRoute><About/></PrivateRoute>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/signup" element={<Signup/>}/>
