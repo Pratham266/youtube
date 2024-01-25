@@ -5,12 +5,12 @@ import { userLogout } from '../redux';
 
 const Navbar = () => {
   const {user} = useSelector((state)=>state);
-  console.log("user in nav : ",user);
+ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout=()=>{
-    console.log("yes in handle logout")
+   
     dispatch(userLogout(navigate));
   }
   
@@ -27,6 +27,10 @@ const Navbar = () => {
         
         <li className="nav-item">
           <Link className="nav-link" to="/">Home
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/about">About
           </Link>
         </li>
         {user?.user?._id ?<>

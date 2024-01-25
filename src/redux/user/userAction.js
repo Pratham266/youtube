@@ -1,7 +1,6 @@
 import axios from "axios"
 import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./userTypes"
 import { BackendUrl } from "../../constants"
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const config = {
@@ -32,9 +31,12 @@ export const fetchUserFailure=(error)=>{
 export const userSignup=(signupData,navigate)=>{
     return (dispatch)=>{
         dispatch(fetchUserRequest)
-        axios.post(`${BackendUrl}/api/auth/signup`,signupData,config)
+        axios.post(`${BackendUrl}/api/auth/signup`,signupData,{
+            headers: { "Content-Type": "multipart/form-data"},
+         
+        })
       .then((res) => {
-        
+        console.log("res : ",res)
         Cookies.set("token", res.data.token,{
           expires: 7,
           domain: ".custom.local",
@@ -46,7 +48,7 @@ export const userSignup=(signupData,navigate)=>{
         navigate("/")    
     })
       .catch((err) => {
-        console.log("err: ",err.message);
+        console.log("Error at signup : ",err)
         dispatch(fetchUserFailure(err.message))
         alert("Some thing Went Wrong!")
         
@@ -78,7 +80,7 @@ export const userLogin=(loginData,navigate)=>{
 }
 
 export const verifyUser=(navigate)=>{
-    console.log("in vefiy user")
+  
     return async(dispatch)=>{
         dispatch(fetchUserRequest)
         try {
@@ -97,9 +99,7 @@ export const verifyUser=(navigate)=>{
 }
 
 export const userLogout = (navigate)=>{
-    console.log("logout")
     return (dispatch)=>{
-        console.log("ye sin return fucntion")
         Cookies.remove('token',{domain: ".custom.local",path: "/"})
         dispatch(fetchUserFailure('User Logged Out'))
         navigate("/login")

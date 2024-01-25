@@ -11,6 +11,7 @@ import { userLogin } from "../redux";
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -62,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <div className="row mt-4">
+    <div className="mt-4">  
       <div className="col-md-8 mx-auto">
 
       <form>
@@ -104,9 +105,9 @@ const Login = () => {
           </button>
         </div>
       </form>
-      </div>
+
       
-     
+      </div>
     </div>
   );
 };

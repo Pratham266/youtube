@@ -26,8 +26,10 @@ const Signup = () => {
     password: "",
     cpassword: "",
     bday: "",
+    mobile:"",
     gender: "",
   });
+  const [image,setImage] = useState(null);
 
 
   const [errors, setErrors] = useState({});
@@ -57,13 +59,12 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    
 
-    const {firstname,lastname,email,password,cpassword,bday,mono,gender} = signupData;
+    const {firstname,lastname,email,password,cpassword,bday,mobile,gender} = signupData;
 
     const validEmail = isValidEmail(email);
     const validPassword = isValidPassword(password);
-    const validMonumber = isValidPhonenumber(mono);
+    const validMonumber = isValidPhonenumber(mobile);
 
     if (!validEmail) {
       setError("email", "email is not valid!");
@@ -72,12 +73,12 @@ const Signup = () => {
     if (!validPassword) {
       setError(
         "password",
-        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and onedigit."
+        "Create Strong Password"
       );
     }
 
     if (!validMonumber) {
-      setError("mono", "Mobile Number length is 10 digit.");
+      setError("mobile", "Mobile Number length is 10 digit.");
     }
 
     if (firstname === "") {
@@ -105,8 +106,8 @@ const Signup = () => {
 
     if (validEmail && validPassword && validMonumber && password === cpassword && firstname !== "" && lastname !== "" && gender !== "" && bday !== ""){
       
-
-       dispatch(userSignup(signupData,navigate)) 
+      console.log("SIGNUP DATA : ",signupData,image)
+       dispatch(userSignup({...signupData,image},navigate)) 
       
     }
      
@@ -114,9 +115,9 @@ const Signup = () => {
 
 
   return (
-    <div className="row mt-4">     
+    <div className="mt-4">     
       <div className="col-md-8 mx-auto">
-        <form>
+        <form >
           <legend>Signup</legend>
 
           <div className="d-flex bd-highlight">
@@ -171,14 +172,14 @@ const Signup = () => {
               <EntryField
                 label={"Enter mobile no"}
                 placeholder={"999-999-9999"}
-                name={"mono"}
-                id={"mono"}
+                name={"mobile"}
+                id={"mobile"}
                 onChange={handleOnchange}
                 type={"number"}
-                error={errors.hasOwnProperty("mono")}
+                error={errors.hasOwnProperty("mobile")}
               />
-              {errors.hasOwnProperty("mono") && (
-                <ErrorAtEntryField errorMessage={errors.mono} />
+              {errors.hasOwnProperty("mobile") && (
+                <ErrorAtEntryField errorMessage={errors.mobile} />
               )}
             </div>
           </div>
@@ -258,6 +259,11 @@ const Signup = () => {
               </div>
             </div>
           </div>
+
+          <div className="form-group">
+      <label  className="form-label mt-4">Upload your Pofile Picture</label>
+      <input className="form-control" type="file"  onChange={(e)=>{setImage(e.target.files[0])}}/>
+    </div>
 
           <div className="mt-4">
             <button

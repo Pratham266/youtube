@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const EntryField = ({label,name,type,value,id,error,onChange,placeholder,required,max}) => {
+const EntryField = ({label,name,type,value,id,error,onChange,placeholder,required,max,disabled}) => {
   const bday =  name === "bday"
   return (
     <>
@@ -17,7 +17,7 @@ const EntryField = ({label,name,type,value,id,error,onChange,placeholder,require
             value={value}
             onChange={onChange}
             max={max}
-            
+            disabled={disabled}
           />
         </div>
     </>

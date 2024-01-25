@@ -1,43 +1,23 @@
-import { useEffect, useState } from "react";
-import UserProfile from "./Pages/UserProfile";
-import Cookies from "js-cookie";
-import { verifyUser } from "./redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
+import PrivateRoute from "./HOC/withAuth";
+import About from "./Pages/About";
+import Navbar from "./Components/Navbar";
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  useEffect(() => {
-    dispatch(verifyUser(navigate));
-  }, []);
-
   return (
     <>
-      <div className="w-full h-100 p-3 mb-2 text-black">
-        <div className="d-flex flex-row">
-          <div className="p-2">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              className="rounded-circle"
-              style={{ width: "65px", height: "65px" }}
-              alt="profile_photo"
-            />
-          </div>
-          <div className="p-2">
-            <h3 className="mt-2">Username</h3>
-            <p className="me-auto" onClick={handleModal}>
-              Profile
-            </p>
-          </div>
-        </div>
-      </div>
-      {showModal && <UserProfile handleClose={handleModal} />}
+        <BrowserRouter>
+      <Navbar/>
+        <Routes>
+          <Route exact path="/" element={<PrivateRoute><Home/></PrivateRoute>}/>
+          <Route exact path="/about" element={<PrivateRoute><About/></PrivateRoute>}/>
+          <Route exact path="/login" element={<Login/>}/>
+          <Route exact path="/signup" element={<Signup/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
