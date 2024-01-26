@@ -7,6 +7,7 @@ import { BackendUrl } from "../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../redux";
+import { debounce } from "../Js/functionForData";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -15,15 +16,23 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleOnchange = (e) => {
+  const handleLoginData =(name,value)=>{
     setLoginData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+  }
 
-    clearError(e.target.name);
-  };
+  const handleData = (name,value) =>{
+    debounce(handleLoginData,1000)(name,value);
+    clearError(name);
+  }
   
+   const handleOnchange = (e) => {
+    const {name,value} = e.target;
+    handleData(name,value)
+  };
+
   
   const clearError = (fieldName) => {
     setErrors((prevErrors) => {

@@ -9,8 +9,8 @@ const Alert = ({message,type}) => {
     return (
         visiable ?
             <>
-            <div class={`alert alert-dismissible ${alert}`}>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" onClick={()=>setVisiable(!visiable)}></button>
+            <div className={`alert alert-dismissible ${alert}`}>
+          <button type="button" className="btn-close" data-bs-dismiss="alert" onClick={()=>setVisiable(!visiable)}></button>
           <strong>{message}</strong>
         </div>
         </>:<></>

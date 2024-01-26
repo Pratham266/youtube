@@ -5,9 +5,10 @@ import Details from "../Components/Details";
 const DataPage = () => {
   
   return (
-    <div className="d-flex justify-content-center ">
+    <div className="d-flex justify-content-center" style={{backgroundColor:"#686565"}}>
      <ListData/>
      <Details/>
+     
     </div>
   );
 };

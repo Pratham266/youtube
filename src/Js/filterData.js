@@ -1,5 +1,4 @@
 export  const getDataUsingId = (data,id)=>{
-    console.log(data)
     const arr = data.filter((element)=>element._id === id)
     return arr[0];
 }

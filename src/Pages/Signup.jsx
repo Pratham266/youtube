@@ -10,6 +10,7 @@ import ErrorAtEntryField from "../Components/ErrorAtEntryField";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignup } from "../redux";
+import { debounce } from "../Js/functionForData";
 
 
 
@@ -17,7 +18,6 @@ import { userSignup } from "../redux";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const [signupData, setSignupData] = useState({
     firstname: "",
@@ -29,18 +29,29 @@ const Signup = () => {
     mobile:"",
     gender: "",
   });
+
+
   const [image,setImage] = useState(null);
 
 
   const [errors, setErrors] = useState({});
 
-  const handleOnchange = (e) => {
+  const handleSignupData  =(name,value)=>{
+    
     setSignupData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [name]:value,
     }));
+  }
+  
+  const handleData = (name,value) =>{
+    debounce(handleSignupData,1000)(name,value);
+    clearError(name);
+  }
 
-    clearError(e.target.name);
+   const handleOnchange = (e) => {
+    const {name,value} = e.target;
+    handleData(name,value)
   };
 
   const clearError = (fieldName) => {
@@ -102,8 +113,6 @@ const Signup = () => {
       setError("gender", "Gender is required");
     }
 
-
-
     if (validEmail && validPassword && validMonumber && password === cpassword && firstname !== "" && lastname !== "" && gender !== "" && bday !== ""){
       
       console.log("SIGNUP DATA : ",signupData,image)
@@ -112,7 +121,6 @@ const Signup = () => {
     }
      
   };
-
 
   return (
     <div className="mt-4">     

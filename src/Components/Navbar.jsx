@@ -26,7 +26,7 @@ const Navbar = () => {
       <ul className="navbar-nav me-auto">
         
         <li className="nav-item">
-          <Link className="nav-link" to="/">Home
+          <Link className="nav-link" to="/"  >Home
           </Link>
         </li>
         <li className="nav-item">
@@ -43,6 +43,12 @@ const Navbar = () => {
         </>}
         
       </ul>
+      {user?.user?._id ? <form className="d-flex">
+      <input className="form-control me-sm-2 text-black" type="search" placeholder="Search"/>
+      <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>:<></>}
+
+      
       
     </div>
   </div>

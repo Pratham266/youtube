@@ -23,14 +23,16 @@ export const fetchYoutubeFailure=(error)=>{
     }
 }
 
-export const fetchYoutube = ()=>{
+export const fetchYoutube = (page)=>{
 
     return async(dispatch)=>{
-        dispatch(fetchYoutubRequest)
+        dispatch(fetchYoutubRequest())
         try{
-            const res = await axios.get(`${BackendUrl}/api/data/suggested`,config);
-            const data  =await res.data;
+            const res = await axios.get(`${BackendUrl}/api/data/suggested?_limit=${10}&_page=${page}`,config);
+            const data = await res.data;
+
             dispatch(fetchYoutubeSuccess(data.channels));
+
         }catch(error){
             console.log("youtube data error : ",error);
             dispatch(fetchYoutubeFailure(error.message));

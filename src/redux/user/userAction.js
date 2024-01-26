@@ -28,7 +28,7 @@ export const fetchUserFailure=(error)=>{
 export const userSignup=(signupData,navigate)=>{
     
     return (dispatch)=>{
-        dispatch(fetchUserRequest)
+        dispatch(fetchUserRequest())
         axios.post(`${BackendUrl}/api/auth/signup`,signupData,{
             headers: { "Content-Type": "multipart/form-data"},
          
@@ -57,7 +57,7 @@ export const userSignup=(signupData,navigate)=>{
 
 export const userLogin=(loginData,navigate)=>{
     return async(dispatch)=>{
-        dispatch(fetchUserRequest)
+        dispatch(fetchUserRequest())
         try{
             const res = await axios.post(`${BackendUrl}/api/auth/login`,loginData,config)
             const data = await res.data;
@@ -80,7 +80,7 @@ export const userLogin=(loginData,navigate)=>{
 export const verifyUser=(navigate)=>{
   
     return async(dispatch)=>{
-        dispatch(fetchUserRequest)
+        dispatch(fetchUserRequest())
         try {
             const res = await axios.get(`${BackendUrl}/api/data/profile`,config)
             const data = await res.data;
