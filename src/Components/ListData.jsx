@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchYoutube } from "../redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleRight, faStar } from "@fortawesome/free-regular-svg-icons";
-import Loader from "./Loader";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
+
 import SmallLoader from "./SmallLoader";
+import ImageComponent from "./ImageComponent";
 
 const ListData = () => {
   const youtubeData = useSelector((state) => state.youtube);
@@ -27,6 +28,7 @@ const ListData = () => {
     // console.log("scroll current  : ",scrollTop);
 
     try {
+
       if (scrollTop + clientHeight + 2 >= scrollHeight) {
         setPage((prev) => prev + 1);
       }
@@ -35,13 +37,15 @@ const ListData = () => {
     }
   };
 
+  console.log("List Page: ",youtubeData.data.length)
+
   useEffect(() => {
 
     scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
 
-    return () => {
-      scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
-    };
+    // return () => {
+    //   scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
+    // };
 
   }, []);
 
@@ -52,13 +56,12 @@ const ListData = () => {
 
  
   return (
-    <div
-      className="p-2 w-25 border-dark m-2 bg-primary rounded"
-      style={scrollStyle}
-      ref={scrollDiv}
-    >
+    <div style={scrollStyle} ref={scrollDiv}>
+
+      {youtubeData?.data.length === 0 ? <h3 className="text-white"> No data found</h3>:<></>}
+      
       {youtubeData?.data.map((item, index) => {
-        // console.log("data id : ",item)
+        
         return (
           <div key={item._id} onClick={() => navigate(`/${item._id}`)}>
             <div
@@ -72,12 +75,7 @@ const ListData = () => {
               }}
             >
               <div className="d-flex ">
-                <img
-                  style={{ height: "30px", width: "30px", margin: "5px" }}
-                  className="border rounded-circle"
-                  src={item.avatarImage}
-                  alt="image"
-                />
+                <ImageComponent src={item.avatarImage} style={{ height: "40px", width: "40px", margin: "5px" }} alt={item.channelName} className={"border rounded-circle"}/>
                 <div className="card-header">
                   {item.channelName} &nbsp;{item._id} 
                   {item.isPremium && (

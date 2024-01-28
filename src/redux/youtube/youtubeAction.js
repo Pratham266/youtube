@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_YOUTUBE_FAILURE, FETCH_YOUTUBE_REQUEST, FETCH_YOUTUBE_SUCCESS } from "./youtubeTypes"
+import { FETCH_YOUTUBE_FAILURE, FETCH_YOUTUBE_REQUEST, FETCH_YOUTUBE_SEARECH_SUCCESS, FETCH_YOUTUBE_SUCCESS } from "./youtubeTypes"
 import { BackendUrl } from "../../constants"
 import { config } from "../../constants"
 
@@ -23,6 +23,13 @@ export const fetchYoutubeFailure=(error)=>{
     }
 }
 
+export const fetchYoutubeSearchSuccess=(data)=>{
+    return{
+        type:FETCH_YOUTUBE_SEARECH_SUCCESS,
+        payload:data
+    }
+}
+
 export const fetchYoutube = (page)=>{
 
     return async(dispatch)=>{
@@ -40,3 +47,18 @@ export const fetchYoutube = (page)=>{
     }
 }
 
+export const fetchSearchYoutube =(searchTerm)=>{
+    return async(dispatch)=>{
+        try{
+            console.log("search term : ",searchTerm)
+            const res = await axios.get(`${BackendUrl}/api/search?_searchTerm=${searchTerm}`,config);
+            const data = await res.data;
+            console.log("data : ",data)
+
+            dispatch(fetchYoutubeSearchSuccess(data.searchChannels))
+
+        }catch(error){
+            console.log("Error : ",error)
+        }
+    }
+}

@@ -13,7 +13,9 @@ export const debounce = (fn, d) => {
     return (...args) => {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        fn.apply(null,args);
+        fn.apply(this,args);
       }, d);
     };
 };
+
+// export const debounceGetData = debounce(,1000);
