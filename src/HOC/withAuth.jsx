@@ -6,15 +6,12 @@ import Loader from "../Components/Loader";
 
 const PrivateRoute = ({ children }) => {
   let isAuthenticated = false;
+
   const token = Cookies.get("token");
   
   const user = useSelector((state) => state.user);
 
   if (user.user._id) isAuthenticated = true;
-
-  if (user.loading) {
-    return <Loader />;
-  }
 
   if (!isAuthenticated && !token) {
     return <Navigate to="/login" />;

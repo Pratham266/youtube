@@ -9,7 +9,7 @@ const ImageComponent = ({src,alt,style,className}) => {
         img.onload = () => {
           setImgSrc(src);
         };
-      }, [src]);
+      }, [imgsrc]);
 
   return (
     <img

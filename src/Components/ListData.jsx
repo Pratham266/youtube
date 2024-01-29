@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchYoutube } from "../redux";
-import {  useNavigate, useParams } from "react-router-dom";
+import { fetchSearchYoutube, fetchYoutube } from "../redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 
@@ -11,7 +11,7 @@ import ImageComponent from "./ImageComponent";
 const ListData = () => {
   const youtubeData = useSelector((state) => state.youtube);
   const { dataId } = useParams();
-  const scrollDiv = useRef(null);
+  const scrollDiv = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -28,7 +28,6 @@ const ListData = () => {
     // console.log("scroll current  : ",scrollTop);
 
     try {
-
       if (scrollTop + clientHeight + 2 >= scrollHeight) {
         setPage((prev) => prev + 1);
       }
@@ -37,15 +36,19 @@ const ListData = () => {
     }
   };
 
-  console.log("List Page: ",youtubeData.data.length)
+  console.log("List Page: ", youtubeData.data.length);
 
   useEffect(() => {
-
     scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
 
-    // return () => {
-    //   scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
-    // };
+    // console.log(document.getElementById("pratham"));
+
+    // if (scrollDiv) {
+    //   return () => {
+    //     console.log("vagisha", document.getElementById("pratham"));
+    //     scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
+    //   };
+    //  }
 
   }, []);
 
@@ -54,14 +57,15 @@ const ListData = () => {
     height: "530px",
   };
 
- 
   return (
-    <div style={scrollStyle} ref={scrollDiv}>
+    <div style={scrollStyle} ref={scrollDiv} id="pratham">
+      {youtubeData?.data.length === 0 ? (
+        <h3 className="text-white"> No data found</h3>
+      ) : (
+        <></>
+      )}
 
-      {youtubeData?.data.length === 0 ? <h3 className="text-white"> No data found</h3>:<></>}
-      
       {youtubeData?.data.map((item, index) => {
-        
         return (
           <div key={item._id} onClick={() => navigate(`/${item._id}`)}>
             <div
@@ -75,9 +79,14 @@ const ListData = () => {
               }}
             >
               <div className="d-flex ">
-                <ImageComponent src={item.avatarImage} style={{ height: "40px", width: "40px", margin: "5px" }} alt={item.channelName} className={"border rounded-circle"}/>
+                <ImageComponent
+                  src={item.avatarImage}
+                  style={{ height: "40px", width: "40px", margin: "5px" }}
+                  alt={item.channelName}
+                  className={"border rounded-circle"}
+                />
                 <div className="card-header">
-                  {item.channelName} &nbsp;{item._id} 
+                  {item.channelName} &nbsp;
                   {item.isPremium && (
                     <FontAwesomeIcon
                       icon={faStar}
@@ -92,7 +101,7 @@ const ListData = () => {
           </div>
         );
       })}
-      {youtubeData.loading ? <SmallLoader/>:<></>}
+      {youtubeData.loading ? <SmallLoader /> : <></>}
     </div>
   );
 };

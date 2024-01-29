@@ -1,29 +1,33 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
-
-import Loader from "./Loader";
 import Bell from "./Bell";
 import SmallLoader from "./SmallLoader";
-import ImageComponent from "./ImageComponent";
+import { subscribeChannel } from "../redux";
 
 const Details = () => {
 
   const { dataId } = useParams();
 
   const youtubeData = useSelector((state) => state.youtube);
-
   const data = getDataUsingId(youtubeData.data, dataId);
+  const navigate = useNavigate();
 
+  const dispatch= useDispatch()
+  
   if (youtubeData.loading) {
     return <SmallLoader />;
   }
 
+  const handleSubscribe=()=>{
+    dispatch(subscribeChannel(dataId));  
+    navigate("/")
+  }
+  
+  console.log("data : ",data)
   console.log("Details Page: ",youtubeData.data.length)
   
- 
-
   return (
     <>
       {!dataId ? (
@@ -47,14 +51,14 @@ const Details = () => {
         <>
           <div className="card h-100 bg-black">
             <div className=" d-flex card-header bg-black">
-              <button type="button" className="btn btn-warning">
+              <button type="button" className="btn btn-warning" onClick={handleSubscribe}>
                 Subscribe
               </button>
               <Bell dataId={dataId} />
             </div>
             <div className="d-flex flex text-white bg-primary rounded m-2">
               <div className="m-4 border border-white rounded">
-                <ImageComponent
+                <img
                   src={data.avatarImage}
                   alt={data.avatarImage}
                   style={{ height: "325px", width: "525px" }}
@@ -67,8 +71,8 @@ const Details = () => {
               </div>
             </div>
             <h3 className="card-header bg-black text-white">
-              {" "}
-              {data.channelName} &nbsp;{" "}
+           
+              {data.channelName} &nbsp;
               {data.isPremium && (
                 <span
                   className="badge rounded-pill bg-warning"

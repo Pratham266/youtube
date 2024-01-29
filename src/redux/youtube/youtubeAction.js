@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_YOUTUBE_FAILURE, FETCH_YOUTUBE_REQUEST, FETCH_YOUTUBE_SEARECH_SUCCESS, FETCH_YOUTUBE_SUCCESS } from "./youtubeTypes"
+import { ADD_SUBSCRIBE_CHANNEL, FETCH_YOUTUBE_FAILURE, FETCH_YOUTUBE_REQUEST, FETCH_YOUTUBE_SEARECH_SUCCESS, FETCH_YOUTUBE_SUCCESS } from "./youtubeTypes"
 import { BackendUrl } from "../../constants"
 import { config } from "../../constants"
 
@@ -30,14 +30,24 @@ export const fetchYoutubeSearchSuccess=(data)=>{
     }
 }
 
+export const addSubscribeChannels=(dataId)=>{
+    return{
+        type:ADD_SUBSCRIBE_CHANNEL,
+        payload:dataId
+    }
+}
+
 export const fetchYoutube = (page)=>{
 
     return async(dispatch)=>{
         dispatch(fetchYoutubRequest())
         try{
-            const res = await axios.get(`${BackendUrl}/api/data/suggested?_limit=${10}&_page=${page}`,config);
+        
+            const res = await axios.get(`${BackendUrl}/api/data/suggested?_limit=${10}&_page=${page}&_searchTerm=${""}`,config);
             const data = await res.data;
 
+            console.log("data : ",data);
+            
             dispatch(fetchYoutubeSuccess(data.channels));
 
         }catch(error){
@@ -51,14 +61,34 @@ export const fetchSearchYoutube =(searchTerm)=>{
     return async(dispatch)=>{
         try{
             console.log("search term : ",searchTerm)
-            const res = await axios.get(`${BackendUrl}/api/search?_searchTerm=${searchTerm}`,config);
+            const res = await axios.get(`${BackendUrl}/api/data/suggested?_limit=${10}&_page=${1}&_searchTerm=${searchTerm}`,config);
             const data = await res.data;
             console.log("data : ",data)
 
-            dispatch(fetchYoutubeSearchSuccess(data.searchChannels))
+            dispatch(fetchYoutubeSearchSuccess(data.channels))
 
         }catch(error){
             console.log("Error : ",error)
+        }
+    }
+}
+
+export const subscribeChannel =(channelId)=>{
+    return async(dispatch)=>{
+        try{
+            console.log("yes called",channelId)
+            const res = await axios.get(`${BackendUrl}/api/data/subscribe/${channelId}`,config);
+            const data = await res.data;
+            console.log("data : ",data);
+            if(data.status === 200){
+                alert("Channel subscribe Successfuly")
+                dispatch(addSubscribeChannels(channelId))
+            }else{
+                alert("error");
+            }
+
+        }catch(error){
+            console.log("Error :",error);
         }
     }
 }
