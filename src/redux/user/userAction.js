@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./userTypes"
+import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, SUBSCRIBE_CHANNEL } from "./userTypes"
 import { BackendUrl, config } from "../../constants"
 import Cookies from "js-cookie";
 
@@ -22,6 +22,13 @@ export const fetchUserFailure=(error)=>{
     return{
         type:FETCH_USER_FAILURE,
         payload:error
+    }
+}
+
+export const subscribeChannelUser =(data)=>{
+    return{
+        type:SUBSCRIBE_CHANNEL,
+        payload:data
     }
 }
 
@@ -103,6 +110,13 @@ export const userLogout = (navigate)=>{
         dispatch(fetchUserFailure('User Logged Out'))
         navigate("/login")
         alert("successful!")
+    }
+}
+
+export const subscribeChannelByData =(channelData)=>{
+    return (dispatch)=>{
+        dispatch(subscribeChannelUser(channelData))
+        alert("Channel subscribe Successfuly");
     }
 }
 

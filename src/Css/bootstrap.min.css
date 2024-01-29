@@ -2826,8 +2826,8 @@ textarea.form-control.is-invalid {
   z-index: 4;
 }
 .btn {
-  --bs-btn-padding-x: 1.5rem;
-  --bs-btn-padding-y: 0.75rem;
+  --bs-btn-padding-x: 0.75rem;
+  --bs-btn-padding-y: 0.25rem;
   --bs-btn-font-family: ;
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 600;

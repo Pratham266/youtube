@@ -14,8 +14,9 @@ const UserProfile = ({ handleClose }) => {
     mobile,
     age,
     birthdate,
+    isPremium
   } = userData;
-
+console.log('data : ',userData)
   return (
     <div className="modal w-full" style={{ display: "block" }}>
       <div className="modal-dialog" role="document">
@@ -101,13 +102,11 @@ const UserProfile = ({ handleClose }) => {
                 />
               </div>
 
-              <div className="p-2 flex-fill bd-highlight">
-                <EntryField
-                  type={"text"}
-                  label={"Unique Id"}
-                  value={id}
-                  disabled
-                />
+              <div className="p-2 flex-fill bd-highlight" style={{marginTop:"65px"}}>
+              <button className={`btn btn-warning ${isPremium ? "disabled":""}`}>
+                    Upgrad to Premium
+                </button>
+              
               </div>
             </div>
           </div>

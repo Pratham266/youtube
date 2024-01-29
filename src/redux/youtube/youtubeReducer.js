@@ -9,7 +9,6 @@ import {
 const initialState = {
   loading: false,
   data: [],
-  subscribeChannels: [],
   error: ``,
 };
 
@@ -32,6 +31,7 @@ const youtubeReducer = (state = initialState, action) => {
         error: ``,
         data: [...state.data, ...action.payload],
       };
+
     case FETCH_YOUTUBE_FAILURE:
       return {
         ...state,
@@ -48,21 +48,13 @@ const youtubeReducer = (state = initialState, action) => {
       };
 
     case ADD_SUBSCRIBE_CHANNEL:
-      const removedChannel = state.data.find(
-        (item) => item._id === action.payload
-      );
-
-      const newChannelState = state.data.filter(
-        (item) => item._id !== action.payload
-      );
-
+      const newChannelState = state.data.filter((item) => item._id !== action.payload);
       return {
         ...state,
         data: newChannelState,
         loading: false,
-        subscribeChannels: [...state.subscribeChannels, removedChannel],
       };
-      
+
     default:
       return state;
   }

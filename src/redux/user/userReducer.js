@@ -1,37 +1,55 @@
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS} from "./userTypes"
+import {
+  FETCH_USER_FAILURE,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  SUBSCRIBE_CHANNEL,
+} from "./userTypes";
 
 const initialState = {
-    loading:false,
-    user:{},
-    error:``
-}
+  loading: false,
+  user: {},
+  error: ``,
+};
 
-const userReducer = (state=initialState,action)=>{
-    switch(action.type){
-        case FETCH_USER_REQUEST:
-            console.log("in request")
-            return{
-            ...state,
-            loading:true,
-            }
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
 
-        case FETCH_USER_SUCCESS:
-            console.log("in success : ",action.payload)
-            return {
-                loading:false,
-                user:action.payload,
-                error:``
-            }
-        case FETCH_USER_FAILURE:
-            
-            return{
-                loading:false,
-                user:{},
-                error:action.payload
-            }
+    case FETCH_USER_SUCCESS:
+      return {
+        loading: false,
+        user: action.payload,
+        error: ``,
+      };
 
-        default: return state
-    }
-}
+    case FETCH_USER_FAILURE:
+      return {
+        loading: false,
+        user: {},
+        error: action.payload,
+      };
+
+    case SUBSCRIBE_CHANNEL:
+      return {
+        ...state,
+        loading: false,
+        user: {
+          ...state.user,
+          channelsSubscribed: [
+            ...state.user.channelsSubscribed,
+            action.payload,
+          ],
+        },
+        error: ``,
+      };
+
+    default:
+      return state;
+  }
+};
 
 export default userReducer;

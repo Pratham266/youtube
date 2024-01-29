@@ -7,13 +7,13 @@ import { BackendUrl } from '../constants';
 
 const UserBar = ({handleModal}) => {
     const {user,loading}  = useSelector((state)=>state.user);
-    console.log("user : ",user,"loading : ",loading)
+    // console.log("user : ",user,"loading : ",loading)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
      dispatch(verifyUser(navigate));
-    }, []);
+    }, []); 
   
     if(loading){
       return<SmallLoader/>
@@ -33,9 +33,15 @@ const UserBar = ({handleModal}) => {
       </div>
       <div className="p-2">
         <h5 className='text-white'>{user.firstname} {user.lastname}</h5>
-        <p className="me-auto" style={{"cursor":"pointer"}} onClick={handleModal}>
-          Profile
-        </p>
+        <div className='d-flex'>
+        <button className="btn btn-secondary" style={{"cursor":"pointer",marginInline:"2px"}} onClick={handleModal}>
+          Profile 
+        </button>
+
+        <button className="btn btn-secondary" style={{"cursor":"pointer",marginInline:"2px"}} onClick={()=>navigate("/subscibe/channels")}>
+        Subscribed channels
+        </button>
+        </div>
       </div>
     </div>
   </div>

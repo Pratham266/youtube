@@ -5,8 +5,9 @@ import ErrorBoundary from "../Components/ErrorBoundary";
 import ErrorText from "../Components/ErrorText";
 
 
-const DataPage = () => {
 
+const DataPage = () => {
+  
   return (
 
     <div className="d-flex justify-content-center" style={{backgroundColor:"#686565"}}>
@@ -15,12 +16,12 @@ const DataPage = () => {
       </div>
 
      <div className="p-2 w-75 border m-2 border-dark rounded bg-primary ">
-        <ErrorBoundary fallback={<h1 style={{color:"red",fontStyle:"italic"}}>Error</h1>}>
+        <ErrorBoundary fallback={<p style={{color:"red",fontStyle:"italic"}}>Error Occured</p>}>
         <Details/>
         </ErrorBoundary>
      </div>
     </div>
-    
+
   );
 };
 

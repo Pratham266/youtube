@@ -20,8 +20,9 @@ const Home = () => {
     return (
       <>
         <UserBar handleModal={handleModal}/>
+        {showModal && <UserProfile handleClose={handleModal} />}
         <DataPage/>
-         {showModal && <UserProfile handleClose={handleModal} />}
+
       </>
     );
 }

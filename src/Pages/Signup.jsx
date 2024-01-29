@@ -115,7 +115,6 @@ const Signup = () => {
 
     if (validEmail && validPassword && validMonumber && password === cpassword && firstname !== "" && lastname !== "" && gender !== "" && bday !== ""){
       
-      console.log("SIGNUP DATA : ",signupData,image)
        dispatch(userSignup({...signupData,image},navigate)) 
       
     }

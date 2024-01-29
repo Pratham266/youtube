@@ -6,7 +6,7 @@ const Bell = ({dataId}) => {
     const [bell,setBell] =useState(false);
     const handleBell=(id)=>{
         setBell(true)
-        console.log("id : ",id)
+       
         setTimeout(()=>{
             setBell(false)
         },1000)   

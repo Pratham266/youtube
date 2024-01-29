@@ -35,9 +35,8 @@ const ListData = () => {
       console.log("error :", error);
     }
   };
-
-  console.log("List Page: ", youtubeData.data.length);
-
+  
+  
   useEffect(() => {
     scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
 
@@ -58,7 +57,7 @@ const ListData = () => {
   };
 
   return (
-    <div style={scrollStyle} ref={scrollDiv} id="pratham">
+    <div style={scrollStyle} ref={scrollDiv} id="pratham" className="scrollbar-ripe-malinka">
       {youtubeData?.data.length === 0 ? (
         <h3 className="text-white"> No data found</h3>
       ) : (

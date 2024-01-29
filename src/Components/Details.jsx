@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
 import Bell from "./Bell";
 import SmallLoader from "./SmallLoader";
-import { subscribeChannel } from "../redux";
+import { subscribeChannel, subscribeChannelByData } from "../redux";
 
 const Details = () => {
 
@@ -13,20 +13,14 @@ const Details = () => {
   const youtubeData = useSelector((state) => state.youtube);
   const data = getDataUsingId(youtubeData.data, dataId);
   const navigate = useNavigate();
-
+  
   const dispatch= useDispatch()
   
-  if (youtubeData.loading) {
-    return <SmallLoader />;
-  }
-
   const handleSubscribe=()=>{
-    dispatch(subscribeChannel(dataId));  
+    dispatch(subscribeChannel(dataId));
+    dispatch(subscribeChannelByData(data));
     navigate("/")
   }
-  
-  console.log("data : ",data)
-  console.log("Details Page: ",youtubeData.data.length)
   
   return (
     <>
@@ -66,8 +60,15 @@ const Details = () => {
                 />
               </div>
 
+        <div className="d-flex  flex-column">
               <div className="m-4">
+                <h1>Description</h1>
                 <p className="card-text">{data.description}</p>
+              </div>
+              <div className="m-4">
+                <h1>Subscribers Count</h1>
+                <p className="card-text">{data.subscribersCount}</p>
+              </div>
               </div>
             </div>
             <h3 className="card-header bg-black text-white">
