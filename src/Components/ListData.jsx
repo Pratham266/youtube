@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSearchYoutube, fetchYoutube } from "../redux";
+import {fetchYoutube } from "../redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -23,6 +23,7 @@ const ListData = () => {
   const handleInfiniteScroll = () => {
     const container = scrollDiv.current;
     const { scrollHeight, scrollTop, clientHeight } = container;
+    
     // console.log("scroll Height : ",scrollHeight);
     // console.log("user view port : ",clientHeight)
     // console.log("scroll current  : ",scrollTop);
@@ -100,7 +101,7 @@ const ListData = () => {
           </div>
         );
       })}
-      {youtubeData.loading ? <SmallLoader /> : <></>}
+      {youtubeData.loading ? <SmallLoader color={"white"}/> : <></>}
     </div>
   );
 };

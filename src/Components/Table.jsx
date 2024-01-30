@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ImageComponent from './ImageComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';

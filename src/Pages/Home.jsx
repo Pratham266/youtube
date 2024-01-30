@@ -1,11 +1,6 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { BackendUrl } from '../constants';
+import React, { useState } from 'react'
 import UserProfile from './UserProfileModal';
-import { verifyUser } from '../redux';
 import DataPage from './DataPage';
-import SmallLoader from '../Components/SmallLoader';
 import UserBar from '../Components/UserBar';
 
 

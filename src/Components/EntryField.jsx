@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const EntryField = ({label,name,type,value,id,error,onChange,placeholder,required,max,disabled}) => {
   const bday =  name === "bday"

@@ -30,6 +30,7 @@ function App() {
 
           <Route exact path="/login" element={<Suspense fallback={<Loader/>}><LazyLogin/></Suspense>}/>
           <Route exact path="/signup" element={<Suspense fallback={<Loader/>}><LazySignup/></Suspense>}/>
+          
           <Route exact path="*" element={<ErrorPage/>}/>
          
         </Routes>

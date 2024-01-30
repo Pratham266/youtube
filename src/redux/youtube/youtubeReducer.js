@@ -21,16 +21,12 @@ const youtubeReducer = (state = initialState, action) => {
       };
 
     case FETCH_YOUTUBE_SUCCESS:
-      // const page  =   action.payload.page;
-      // const data = page === 1 ? action.payload.channelsData:[];
-      // console.log("data : ",data)
-      // console.log("DATA HERE: ",[...state.data,...action.payload])
-      
+      const newData =action.payload.filter((newObj)=>{return !state.data.some(existingObj=>existingObj._id === newObj._id)});
       return {
         ...state,
         loading: false,
         error: ``,
-        data: [...state.data, ...action.payload],
+         data: [...state.data, ...newData],
       };
 
     case FETCH_YOUTUBE_FAILURE:

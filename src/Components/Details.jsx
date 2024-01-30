@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
@@ -28,17 +28,6 @@ const Details = () => {
         <>
           <div className="align-item-center justify-content-center">
             <h1 className="text-white">Welcome to Our Website</h1>
-            <p className="text-white">
-              We're thrilled to welcome you to our online space! Explore our
-              site to discover a wealth of information, exciting features, and a
-              community that shares your interests.
-            </p>
-            <p className="text-white">
-              Whether you're here for knowledge, entertainment, or to connect
-              with others, we've got something for you. Take a look around and
-              make yourself at home. If you have any questions or need
-              assistance, feel free to reach out. Enjoy your time here!
-            </p>
           </div>
         </>
       ) : (

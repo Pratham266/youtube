@@ -12,9 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
 
-
-
-
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,32 +23,29 @@ const Signup = () => {
     password: "",
     cpassword: "",
     bday: "",
-    mobile:"",
+    mobile: "",
     gender: "",
   });
 
-
-  const [image,setImage] = useState(null);
-
+  const [image, setImage] = useState(null);
 
   const [errors, setErrors] = useState({});
 
-  const handleSignupData  =(name,value)=>{
-    
+  const handleSignupData = (name, value) => {
     setSignupData((prevData) => ({
       ...prevData,
-      [name]:value,
+      [name]: value,
     }));
-  }
-  
-  const handleData = (name,value) =>{
-    debounce(handleSignupData,1000)(name,value);
-    clearError(name);
-  }
+  };
 
-   const handleOnchange = (e) => {
-    const {name,value} = e.target;
-    handleData(name,value)
+  const handleData = (name, value) => {
+    debounce(handleSignupData, 1000)(name, value);
+    clearError(name);
+  };
+
+  const handleOnchange = (e) => {
+    const { name, value } = e.target;
+    handleData(name, value);
   };
 
   const clearError = (fieldName) => {
@@ -66,12 +60,19 @@ const Signup = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: errorMessage }));
   };
 
-
   const handleSignup = (e) => {
     e.preventDefault();
 
-
-    const {firstname,lastname,email,password,cpassword,bday,mobile,gender} = signupData;
+    const {
+      firstname,
+      lastname,
+      email,
+      password,
+      cpassword,
+      bday,
+      mobile,
+      gender,
+    } = signupData;
 
     const validEmail = isValidEmail(email);
     const validPassword = isValidPassword(password);
@@ -82,10 +83,7 @@ const Signup = () => {
     }
 
     if (!validPassword) {
-      setError(
-        "password",
-        "Create Strong Password"
-      );
+      setError("password", "Create Strong Password");
     }
 
     if (!validMonumber) {
@@ -113,23 +111,28 @@ const Signup = () => {
       setError("gender", "Gender is required");
     }
 
-    if (validEmail && validPassword && validMonumber && password === cpassword && firstname !== "" && lastname !== "" && gender !== "" && bday !== ""){
-      
-       dispatch(userSignup({...signupData,image},navigate)) 
-      
+    if (
+      validEmail &&
+      validPassword &&
+      validMonumber &&
+      password === cpassword &&
+      firstname !== "" &&
+      lastname !== "" &&
+      gender !== "" &&
+      bday !== ""
+    ) {
+      dispatch(userSignup({ ...signupData, image }, navigate));
     }
-     
   };
 
   return (
-    <div className="mt-4">     
+    <div className="mt-4">
       <div className="col-md-8 mx-auto">
-        <form >
+        <form>
           <legend>Signup</legend>
 
           <div className="d-flex bd-highlight">
             <div className="p-2 flex-fill bd-highlight">
-              
               <EntryField
                 label={"First Name"}
                 type={"text"}
@@ -240,7 +243,10 @@ const Signup = () => {
               )}
             </div>
 
-            <div className="p-2 flex-fill bd-highlight" style={{ width: "182px" }}>
+            <div
+              className="p-2 flex-fill bd-highlight"
+              style={{ width: "182px" }}
+            >
               <div>
                 <label className="form-label mt-4">Gender</label>
                 <div className="d-flex">
@@ -268,9 +274,17 @@ const Signup = () => {
           </div>
 
           <div className="form-group">
-      <label  className="form-label mt-4">Upload your Pofile Picture</label>
-      <input className="form-control" type="file"  onChange={(e)=>{setImage(e.target.files[0])}}/>
-    </div>
+            <label className="form-label mt-4">
+              Upload your Pofile Picture
+            </label>
+            <input
+              className="form-control"
+              type="file"
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+              }}
+            />
+          </div>
 
           <div className="mt-4">
             <button

@@ -1,10 +1,13 @@
 import React from "react";
 import EntryField from "../Components/EntryField";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BackendUrl } from "../constants";
+import { toggleToPremium } from "../redux";
 
 const UserProfile = ({ handleClose }) => {
   const userData = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
   const {
     _id: id,
     firstname,
@@ -14,9 +17,15 @@ const UserProfile = ({ handleClose }) => {
     mobile,
     age,
     birthdate,
-    isPremium
+    isPremium,
+    userId
   } = userData;
-console.log('data : ',userData)
+
+  const handlePremium = ()=>{
+    dispatch(toggleToPremium())  
+  }
+console.log("user modal : ",userData)
+
   return (
     <div className="modal w-full" style={{ display: "block" }}>
       <div className="modal-dialog" role="document">
@@ -103,7 +112,7 @@ console.log('data : ',userData)
               </div>
 
               <div className="p-2 flex-fill bd-highlight" style={{marginTop:"65px"}}>
-              <button className={`btn btn-warning ${isPremium ? "disabled":""}`}>
+              <button className={`btn btn-warning ${isPremium ? "":""}`} onClick={handlePremium}>
                     Upgrade to Premium
                 </button>
               

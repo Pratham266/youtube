@@ -3,6 +3,7 @@ import {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   SUBSCRIBE_CHANNEL,
+  UPGRADE_TO_PREMIUM,
 } from "./userTypes";
 
 const initialState = {
@@ -37,11 +38,14 @@ const userReducer = (state = initialState, action) => {
     case SUBSCRIBE_CHANNEL:
       return {
         ...state,
-        loading: false,
-        user:state.user,
         subscribedchannels:action.payload,
-        error: ``,
-      };
+           };
+    case UPGRADE_TO_PREMIUM:
+    console.log("called: ",{...state.user})  
+    
+    return{
+        ...state,
+      }
 
     default:
       return state;

@@ -1,9 +1,7 @@
 import axios from "axios"
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, SUBSCRIBE_CHANNEL } from "./userTypes"
+import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, SUBSCRIBE_CHANNEL, UPGRADE_TO_PREMIUM } from "./userTypes"
 import { BackendUrl, config } from "../../constants"
 import Cookies from "js-cookie";
-
-
 
 export const fetchUserRequest=()=>{
     return{
@@ -28,6 +26,13 @@ export const fetchUserFailure=(error)=>{
 export const subscribeChannelUser =(data)=>{
     return{
         type:SUBSCRIBE_CHANNEL,
+        payload:data
+    }
+}
+
+export const toggleUpgrade = (data)=>{
+    return{
+        type:UPGRADE_TO_PREMIUM,
         payload:data
     }
 }
@@ -116,7 +121,6 @@ export const userLogout = (navigate)=>{
 export const addSubscribeData =(channelData)=>{
     return (dispatch)=>{
         dispatch(subscribeChannelUser(channelData))
-        
     }
 }
 
@@ -133,6 +137,19 @@ export const getSubscribedData = ()=>{
             console.log("error")
             dispatch(fetchUserFailure(error.message))
 
+        }
+    }
+}
+
+export const toggleToPremium = () =>{
+    return async(dispatch)=>{
+        dispatch(fetchUserRequest());
+        try{
+            const res  = await axios.get(`${BackendUrl}/api/data/premium`,config);
+            const data = await 
+            dispatch(toggleUpgrade())
+        }catch(error){
+            // dispatch(fetchUserFailure(error.message))
         }
     }
 }

@@ -1,9 +1,7 @@
-import React, { useDeferredValue, useState } from "react";
+import React, {useState } from "react";
 import EntryField from "../Components/EntryField";
 import { isValidEmail, isValidPassword } from "../Js/Validator";
 import ErrorAtEntryField from "../Components/ErrorAtEntryField";
-import axios from "axios";
-import { BackendUrl } from "../constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../redux";

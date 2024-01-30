@@ -8,16 +8,16 @@ import ImageComponent from './ImageComponent';
 
 const UserBar = ({handleModal}) => {
     const {user,loading}  = useSelector((state)=>state.user);
-    //console.log("user : ",user,"loading : ",loading)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+  
     useEffect(() => {
      dispatch(verifyUser(navigate));
     }, []); 
-  
+    
     if(loading){
-      return<SmallLoader/>
+      return<SmallLoader color={"black"}/>
     }
 
   return (
@@ -41,7 +41,7 @@ const UserBar = ({handleModal}) => {
         </button>
 
         <button className="btn btn-secondary" style={{"cursor":"pointer",marginInline:"2px"}} onClick={()=>navigate("/subscibe/channels")}>
-        Subscribed channels
+         Subscribed channels
         </button>
         </div>
       </div>
