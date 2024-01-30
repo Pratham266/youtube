@@ -113,10 +113,26 @@ export const userLogout = (navigate)=>{
     }
 }
 
-export const subscribeChannelByData =(channelData)=>{
+export const addSubscribeData =(channelData)=>{
     return (dispatch)=>{
         dispatch(subscribeChannelUser(channelData))
-        alert("Channel subscribe Successfuly");
+        
     }
 }
 
+
+export const getSubscribedData = ()=>{
+    return async(dispatch)=>{
+        dispatch(fetchUserRequest())
+        try{
+            const res = await axios.get(`${BackendUrl}/api/data/viewsubscribed`,config);
+            const data = await res.data;
+            dispatch(addSubscribeData(data.channels))
+            
+        }catch(error){
+            console.log("error")
+            dispatch(fetchUserFailure(error.message))
+
+        }
+    }
+}

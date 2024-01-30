@@ -8,6 +8,7 @@ import {
 const initialState = {
   loading: false,
   user: {},
+  subscribedchannels:[],
   error: ``,
 };
 
@@ -37,13 +38,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {
-          ...state.user,
-          channelsSubscribed: [
-            ...state.user.channelsSubscribed,
-            action.payload,
-          ],
-        },
+        user:state.user,
+        subscribedchannels:action.payload,
         error: ``,
       };
 

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
 import Bell from "./Bell";
 import SmallLoader from "./SmallLoader";
-import { subscribeChannel, subscribeChannelByData } from "../redux";
+import { subscribeChannel } from "../redux";
 
 const Details = () => {
 
@@ -18,7 +18,7 @@ const Details = () => {
   
   const handleSubscribe=()=>{
     dispatch(subscribeChannel(dataId));
-    dispatch(subscribeChannelByData(data));
+    //dispatch(subscribeChannelByData(data));
     navigate("/")
   }
   

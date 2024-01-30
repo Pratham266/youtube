@@ -104,7 +104,7 @@ console.log('data : ',userData)
 
               <div className="p-2 flex-fill bd-highlight" style={{marginTop:"65px"}}>
               <button className={`btn btn-warning ${isPremium ? "disabled":""}`}>
-                    Upgrad to Premium
+                    Upgrade to Premium
                 </button>
               
               </div>

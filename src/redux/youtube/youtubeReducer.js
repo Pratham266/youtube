@@ -1,9 +1,9 @@
 import {
-  ADD_SUBSCRIBE_CHANNEL,
   FETCH_YOUTUBE_FAILURE,
   FETCH_YOUTUBE_REQUEST,
   FETCH_YOUTUBE_SEARECH_SUCCESS,
   FETCH_YOUTUBE_SUCCESS,
+  REMOVE_SUBSCRIBE_CHANNEL,
 } from "./youtubeTypes";
 
 const initialState = {
@@ -25,6 +25,7 @@ const youtubeReducer = (state = initialState, action) => {
       // const data = page === 1 ? action.payload.channelsData:[];
       // console.log("data : ",data)
       // console.log("DATA HERE: ",[...state.data,...action.payload])
+      
       return {
         ...state,
         loading: false,
@@ -47,8 +48,9 @@ const youtubeReducer = (state = initialState, action) => {
         error: ``,
       };
 
-    case ADD_SUBSCRIBE_CHANNEL:
+    case REMOVE_SUBSCRIBE_CHANNEL:
       const newChannelState = state.data.filter((item) => item._id !== action.payload);
+      
       return {
         ...state,
         data: newChannelState,

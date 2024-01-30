@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  ADD_SUBSCRIBE_CHANNEL,
+  REMOVE_SUBSCRIBE_CHANNEL,
   FETCH_YOUTUBE_FAILURE,
   FETCH_YOUTUBE_REQUEST,
   FETCH_YOUTUBE_SEARECH_SUCCESS,
@@ -36,9 +36,9 @@ export const fetchYoutubeSearchSuccess = (data) => {
   };
 };
 
-export const addSubscribeChannels = (dataId) => {
+export const removeSubscribeChannelsFromState = (dataId) => {
   return {
-    type: ADD_SUBSCRIBE_CHANNEL,
+    type: REMOVE_SUBSCRIBE_CHANNEL,
     payload: dataId,
   };
 };
@@ -53,7 +53,7 @@ export const fetchYoutube = (page) => {
         config
       );
       const data = await res.data;
-      
+
       dispatch(fetchYoutubeSuccess(data.channels));
     } catch (error) {
       console.log("youtube data error : ", error);
@@ -89,13 +89,17 @@ export const subscribeChannel = (channelId) => {
       );
       const data = await res.data;
       console.log("data : ", data);
-      if (data.status === 200) {
-        dispatch(addSubscribeChannels(channelId));
+
+      if (res.status === 200) {
+        alert("subscribed successfully")
+        dispatch(removeSubscribeChannelsFromState(channelId));
       } else {
         alert("error");
       }
+
     } catch (error) {
       console.log("Error :", error);
     }
   };
 };
+

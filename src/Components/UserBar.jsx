@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { verifyUser } from '../redux';
 import SmallLoader from './SmallLoader';
 import { BackendUrl } from '../constants';
+import ImageComponent from './ImageComponent';
 
 const UserBar = ({handleModal}) => {
     const {user,loading}  = useSelector((state)=>state.user);
-    // console.log("user : ",user,"loading : ",loading)
+    //console.log("user : ",user,"loading : ",loading)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const UserBar = ({handleModal}) => {
     <div className="w-full p-2 text-white bg-black ">
     <div className="d-flex flex-row">
       <div className="p-2">
-        {user && <img
+        {user && <ImageComponent
           src={`${BackendUrl}/${user.image}`}
           className="rounded-circle"
           style={{ width: "60px", height: "60px" }}
@@ -34,6 +35,7 @@ const UserBar = ({handleModal}) => {
       <div className="p-2">
         <h5 className='text-white'>{user.firstname} {user.lastname}</h5>
         <div className='d-flex'>
+       
         <button className="btn btn-secondary" style={{"cursor":"pointer",marginInline:"2px"}} onClick={handleModal}>
           Profile 
         </button>

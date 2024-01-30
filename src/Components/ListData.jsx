@@ -35,19 +35,14 @@ const ListData = () => {
       console.log("error :", error);
     }
   };
-  
-  
+
   useEffect(() => {
     scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
-
-    // console.log(document.getElementById("pratham"));
-
-    // if (scrollDiv) {
-    //   return () => {
-    //     console.log("vagisha", document.getElementById("pratham"));
-    //     scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
-    //   };
-    //  }
+    return () => {
+      if (scrollDiv && scrollDiv.current) {
+        scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
+      }
+    };
 
   }, []);
 
@@ -57,7 +52,12 @@ const ListData = () => {
   };
 
   return (
-    <div style={scrollStyle} ref={scrollDiv} id="pratham" className="scrollbar-ripe-malinka">
+    <div
+      style={scrollStyle}
+      ref={scrollDiv}
+      id="pratham"
+      className="scrollbar-ripe-malinka"
+    >
       {youtubeData?.data.length === 0 ? (
         <h3 className="text-white"> No data found</h3>
       ) : (
