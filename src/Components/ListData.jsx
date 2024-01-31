@@ -15,16 +15,16 @@ const ListData = () => {
   const scrollDiv = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
-  
+  const [page, setPage] = useState(0);
+
   useEffect(() => {
     dispatch(fetchYoutube(page));
-  }, [page]);
-  
-  useEffect(()=>{
+  }, [page,user?.user?.isPremium]);
+
+  useEffect(() => {
     setPage(1)
-  },[user?.user?.isPremium])
-  
+  }, [user?.user?.isPremium]);
+
   const handleInfiniteScroll = () => {
     const container = scrollDiv.current;
     const { scrollHeight, scrollTop, clientHeight } = container;
@@ -34,7 +34,6 @@ const ListData = () => {
     // console.log("scroll current  : ",scrollTop);
 
     try {
-
       if (scrollTop + clientHeight + 2 >= scrollHeight) {
         setPage((prev) => prev + 1);
       }
@@ -44,9 +43,8 @@ const ListData = () => {
   };
 
   useEffect(() => {
-    
-      scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
-    
+    scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
+
     return () => {
       if (scrollDiv && scrollDiv.current) {
         scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);

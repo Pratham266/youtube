@@ -71,7 +71,7 @@ export const fetchSearchYoutube = (searchTerm) => {
         config
       );
       const data = await res.data;
-
+        console.log("SEARCH:",data)
       dispatch(fetchYoutubeSearchSuccess(data.channels));
     } catch (error) {
       console.log("Error : ", error);

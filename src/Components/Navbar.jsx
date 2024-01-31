@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {fetchSearchYoutube, fetchYoutube, userLogout } from "../redux";
+import { fetchSearchYoutube, fetchYoutube, userLogout } from "../redux";
 import { debounce } from "../Js/functionForData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state);
@@ -15,10 +17,13 @@ const Navbar = () => {
     dispatch(userLogout(navigate));
   };
 
-  const debounceGetData = debounce((searchTerm) => dispatch(fetchSearchYoutube(searchTerm)),500)
-  
+  const debounceGetData = debounce(
+    (searchTerm) => dispatch(fetchSearchYoutube(searchTerm)),
+    500
+  );
+
   const handleSearch = () => {
-    debounceGetData(searchRef.current.value)    
+    debounceGetData(searchRef.current.value);
   };
 
   return (
@@ -53,15 +58,11 @@ const Navbar = () => {
               </li>
               {user?.user?._id ? (
                 <>
-                  <li className="nav-item">
-                    <span
-                      className="nav-link"
-                      style={{ cursor: "pointer" }}
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </span>
-                  </li>
+                <li className="nav-item">
+                <Link className="nav-link" to="/team">
+                  Team
+                </Link>
+              </li>
                 </>
               ) : (
                 <>
@@ -74,22 +75,31 @@ const Navbar = () => {
               )}
             </ul>
 
-           
-
             {user?.user?._id ? (
-              <form className="d-flex">
-              <input
-                className="form me-sm-2 text-white"
-                ref={searchRef}
-                onChange={handleSearch}
-                type="search"
-                placeholder="Search"
-              />
-            </form>
+              <div className="d-flex">
+                <div className="mx-4">
+
+                <input
+                  className="form me-sm-2 text-white"
+                  ref={searchRef}
+                  onChange={handleSearch}
+                  type="search"
+                  placeholder="Search"
+                  />
+                </div>
+
+              <div className="mx-4">
+                <FontAwesomeIcon
+                  icon={faRightFromBracket}
+                  size="xl"
+                  onClick={handleLogout}
+                  style={{ color: "#ffffff",cursor:"pointer"}}
+                  />
+                  </div>
+              </div>
             ) : (
               <></>
             )}
-            
           </div>
         </div>
       </nav>
