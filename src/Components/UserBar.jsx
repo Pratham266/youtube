@@ -33,7 +33,7 @@ const UserBar = ({handleModal}) => {
         
       </div>
       <div className="p-2">
-        <h5 className='text-white'>{user.firstname} {user.lastname}</h5>
+        <h5 className='text-white'>{user.firstname} {user.lastname} {user.isPremium && <span class="badge rounded-pill bg-warning">Premium</span>}</h5>
         <div className='d-flex'>
        
         <button className="btn btn-secondary" style={{"cursor":"pointer",marginInline:"2px"}} onClick={handleModal}>

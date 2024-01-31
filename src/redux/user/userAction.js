@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, SUBSCRIBE_CHANNEL, UPGRADE_TO_PREMIUM } from "./userTypes"
+import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, SUBSCRIBE_CHANNEL, UNSUBSCRIBE_CHANNEL, UPGRADE_TO_PREMIUM } from "./userTypes"
 import { BackendUrl, config } from "../../constants"
 import Cookies from "js-cookie";
 
@@ -30,9 +30,18 @@ export const subscribeChannelUser =(data)=>{
     }
 }
 
+
+
 export const toggleUpgrade = (data)=>{
     return{
         type:UPGRADE_TO_PREMIUM,
+        payload:data
+    }
+}
+
+export const unsubscribeChannel=(data)=>{
+    return{
+        type:UNSUBSCRIBE_CHANNEL,
         payload:data
     }
 }
@@ -124,6 +133,25 @@ export const addSubscribeData =(channelData)=>{
     }
 }
 
+export const removeUnsubscribeChannel=(channelId)=>{
+    return async(dispatch)=>{
+        try{
+            
+            const res = await axios.get(`${BackendUrl}/api/data/subscribe/${channelId}`,config);
+            const data = await res.data;
+            if(data.status){
+                alert("Unsubscribed successfully")
+                dispatch(unsubscribeChannel(channelId))
+            }
+            else{
+                alert("fail to Unsubscribed!")
+            }
+        }catch(error){
+            alert("Something went wrong!")
+        }
+    }
+}
+
 
 export const getSubscribedData = ()=>{
     return async(dispatch)=>{
@@ -143,13 +171,13 @@ export const getSubscribedData = ()=>{
 
 export const toggleToPremium = () =>{
     return async(dispatch)=>{
-        dispatch(fetchUserRequest());
         try{
             const res  = await axios.get(`${BackendUrl}/api/data/premium`,config);
-            const data = await 
-            dispatch(toggleUpgrade())
+            const data = await res.data;
+            dispatch(toggleUpgrade(data.user))
+            alert("Upgraded")
         }catch(error){
-            // dispatch(fetchUserFailure(error.message))
+            dispatch(fetchUserFailure(error.message))
         }
     }
 }

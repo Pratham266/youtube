@@ -45,6 +45,7 @@ export const removeSubscribeChannelsFromState = (dataId) => {
 
 
 export const fetchYoutube = (page) => {
+  
   return async (dispatch) => {
     dispatch(fetchYoutubRequest());
     try {
@@ -53,8 +54,7 @@ export const fetchYoutube = (page) => {
         config
       );
       const data = await res.data;
-
-      dispatch(fetchYoutubeSuccess(data.channels));
+      dispatch(fetchYoutubeSuccess({channels:data.channels,page}));
     } catch (error) {
       console.log("youtube data error : ", error);
       dispatch(fetchYoutubeFailure(error.message));
@@ -82,7 +82,6 @@ export const fetchSearchYoutube = (searchTerm) => {
 export const subscribeChannel = (channelId) => {
   return async (dispatch) => {
     try {
-      console.log("yes called", channelId);
       const res = await axios.get(
         `${BackendUrl}/api/data/subscribe/${channelId}`,
         config

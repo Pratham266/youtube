@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EntryField from "../Components/EntryField";
 import { useDispatch, useSelector } from "react-redux";
 import { BackendUrl } from "../constants";
@@ -18,13 +18,13 @@ const UserProfile = ({ handleClose }) => {
     age,
     birthdate,
     isPremium,
-    userId
+    userId,
   } = userData;
 
-  const handlePremium = ()=>{
-    dispatch(toggleToPremium())  
-  }
-console.log("user modal : ",userData)
+  const handlePremium = () => {
+    dispatch(toggleToPremium());
+    handleClose();
+  };
 
   return (
     <div className="modal w-full" style={{ display: "block" }}>
@@ -33,11 +33,11 @@ console.log("user modal : ",userData)
           <div className="modal-header">
             <img
               src={`${BackendUrl}/${userData.image}`}
-              className="rounded-circle m-2"
-              style={{ width: "45px", height: "45px" }}
+              style={{ width: "45px", height: "45px"}}
+            className={`rounded-circle m-2 border border-3  ${userData.isPremium ? "border-warning":"border-dark"}`}
               alt="profile_photo"
             />
-            <h5 className="modal-title">Profile</h5>
+            {userData.isPremium && <span class="badge rounded-pill bg-warning">Premium</span>}
             <button
               type="button"
               className="btn-close"
@@ -111,11 +111,16 @@ console.log("user modal : ",userData)
                 />
               </div>
 
-              <div className="p-2 flex-fill bd-highlight" style={{marginTop:"65px"}}>
-              <button className={`btn btn-warning ${isPremium ? "":""}`} onClick={handlePremium}>
-                    Upgrade to Premium
+              <div
+                className="p-2 flex-fill bd-highlight"
+                style={{ marginTop: "65px" }}
+              >
+                <button
+                  className={`btn btn-warning ${isPremium ? "" : ""}`}
+                  onClick={handlePremium}
+                >
+                  {!isPremium ? "Upgrade to Premium" : "Downgrade to Normal"}
                 </button>
-              
               </div>
             </div>
           </div>

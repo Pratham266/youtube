@@ -17,7 +17,6 @@ const SubscribeChannels = () => {
   const { subscribedchannels } = user;
 
   const dispatch = useDispatch();
-  console.log("user : ", user);
   useEffect(() => {
     dispatch(getSubscribedData());
   }, []);
@@ -93,6 +92,9 @@ const SubscribeChannels = () => {
             >
               <span className="me-2">Subscribers</span>
               {getIcons("subscribersCount", sortBy, sortOrder)}
+            </th>
+            <th>
+              
             </th>
           </tr>
         </thead>

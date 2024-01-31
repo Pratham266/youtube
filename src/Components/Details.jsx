@@ -18,7 +18,6 @@ const Details = () => {
   
   const handleSubscribe=()=>{
     dispatch(subscribeChannel(dataId));
-    //dispatch(subscribeChannelByData(data));
     navigate("/")
   }
   
@@ -37,7 +36,6 @@ const Details = () => {
               <button type="button" className="btn btn-warning" onClick={handleSubscribe}>
                 Subscribe
               </button>
-              <Bell dataId={dataId} />
             </div>
             <div className="d-flex flex text-white bg-primary rounded m-2">
               <div className="m-4 border border-white rounded">

@@ -1,34 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchYoutube } from "../redux";
+import { fetchYoutube } from "../redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
-
 import SmallLoader from "./SmallLoader";
 import ImageComponent from "./ImageComponent";
+import Loader from "./Loader";
 
 const ListData = () => {
-  const youtubeData = useSelector((state) => state.youtube);
+  const { youtube, user } = useSelector((state) => state);
+
   const { dataId } = useParams();
   const scrollDiv = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-
+  
   useEffect(() => {
     dispatch(fetchYoutube(page));
   }, [page]);
-
+  
+  useEffect(()=>{
+    setPage(1)
+  },[user?.user?.isPremium])
+  
   const handleInfiniteScroll = () => {
     const container = scrollDiv.current;
     const { scrollHeight, scrollTop, clientHeight } = container;
-    
+
     // console.log("scroll Height : ",scrollHeight);
     // console.log("user view port : ",clientHeight)
     // console.log("scroll current  : ",scrollTop);
 
     try {
+
       if (scrollTop + clientHeight + 2 >= scrollHeight) {
         setPage((prev) => prev + 1);
       }
@@ -38,19 +44,25 @@ const ListData = () => {
   };
 
   useEffect(() => {
-    scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
+    
+      scrollDiv.current.addEventListener("scroll", handleInfiniteScroll);
+    
     return () => {
       if (scrollDiv && scrollDiv.current) {
         scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
       }
     };
-
   }, []);
 
   const scrollStyle = {
     overflowY: "scroll",
-    height: "530px",
+    height: "520px",
   };
+
+  if (!youtube?.data) {
+    console.log("in loader");
+    return <Loader />;
+  }
 
   return (
     <div
@@ -59,13 +71,13 @@ const ListData = () => {
       id="pratham"
       className="scrollbar-ripe-malinka"
     >
-      {youtubeData?.data.length === 0 ? (
+      {youtube?.data.length === 0 ? (
         <h3 className="text-white"> No data found</h3>
       ) : (
         <></>
       )}
 
-      {youtubeData?.data.map((item, index) => {
+      {youtube?.data.map((item, index) => {
         return (
           <div key={item._id} onClick={() => navigate(`/${item._id}`)}>
             <div
@@ -101,7 +113,8 @@ const ListData = () => {
           </div>
         );
       })}
-      {youtubeData.loading ? <SmallLoader color={"white"}/> : <></>}
+
+      {youtube?.loading ? <SmallLoader color={"white"} /> : <></>}
     </div>
   );
 };

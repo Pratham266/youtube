@@ -21,14 +21,26 @@ const youtubeReducer = (state = initialState, action) => {
       };
 
     case FETCH_YOUTUBE_SUCCESS:
-      const newData =action.payload.filter((newObj)=>{return !state.data.some(existingObj=>existingObj._id === newObj._id)});
-      return {
-        ...state,
-        loading: false,
-        error: ``,
-         data: [...state.data, ...newData],
-      };
-
+      if (action.payload.page == 1) {
+        return {
+          ...state,
+          loading: false,
+          error: ``,
+          data: action.payload.channels,
+        };
+      } else {
+        const newData = action.payload.channels.filter((newObj) => {
+          return !state.data.some(
+            (existingObj) => existingObj._id === newObj._id
+          );
+        });
+        return {
+          ...state,
+          loading: false,
+          error: ``,
+          data: [...state.data, ...newData],
+        };
+      }
     case FETCH_YOUTUBE_FAILURE:
       return {
         ...state,
@@ -45,8 +57,9 @@ const youtubeReducer = (state = initialState, action) => {
       };
 
     case REMOVE_SUBSCRIBE_CHANNEL:
-      const newChannelState = state.data.filter((item) => item._id !== action.payload);
-      
+      const newChannelState = state.data.filter(
+        (item) => item._id !== action.payload
+      );
       return {
         ...state,
         data: newChannelState,
