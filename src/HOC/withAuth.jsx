@@ -3,6 +3,7 @@ import { Children } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Loader from "../Components/Loader";
+import Navbar from "../Components/Navbar";
 
 const PrivateRoute = ({ children }) => {
   let isAuthenticated = false;
@@ -17,7 +18,10 @@ const PrivateRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
-  return <>{children}</>;
+  return <>
+   <Navbar/>
+  {children}
+  </>;
 };
 
 export default PrivateRoute;

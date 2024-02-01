@@ -40,11 +40,12 @@ export const fetchTeam = () => {
     try {
       const res = await axios.get(`${BackendUrl}/api/buddy/showbuddy`, config);
       const data = await res.data;
-
+      console.log("res Team : ",data)
       if (data.status === 200) {
         dispatch(fetchTeamSuccess(data.buddies));
-      } else {
-        console.log("data : ", data);
+      } else if(data.status === 204)
+      {
+        dispatch(fetchTeamSuccess(data.buddies));
       }
     } catch (error) {
       console.log("ERROR:", error.message);
@@ -57,14 +58,12 @@ export const fetchBuddyChannels = (userId)  =>{
     return async(dispatch)=>{
         dispatch(fetchTeamRequest());
         try{    
-
             const res =  await axios.get(`${BackendUrl}/api/buddy/buddychannels/${userId}`,config);
             const data = await res.data;
-            console.log("res : ",data)
+            console.log("res Buddy Channels : ",data)
             if(data.status === 200){
                 dispatch(fetchBuddySubscribeChannels(data.channels))
             }else if(data.status === 204){
-                alert(`No data found!`)
                 dispatch(fetchBuddySubscribeChannels([]))
             }
         }catch(error){

@@ -7,7 +7,7 @@ import {
   isValidPhonenumber,
 } from "../Js/Validator";
 import ErrorAtEntryField from "../Components/ErrorAtEntryField";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
@@ -296,6 +296,9 @@ const Signup = () => {
             </button>
           </div>
         </form>
+        <div className="mt-2">
+        <p>Already have an account! <Link to="/login" style={{fontStyle:"italic"}}>Login Account</Link></p>
+      </div>
       </div>
     </div>
   );

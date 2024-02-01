@@ -26,7 +26,9 @@ const BuddyChannels = () => {
       ) : (
         <>
           {team?.subscribedChannels.length === 0 ? (
-            <p className="text-white m-4">No Subscribed Channels for this Buddy</p>
+            <p className="text-white m-4">
+              No Subscribed Channels for this Buddy
+            </p>
           ) : (
             <>
               <table class="table table-hover">
@@ -39,21 +41,22 @@ const BuddyChannels = () => {
                   </tr>
                 </thead>
                 <tbody>
-
                   {team?.subscribedChannels.map((item) => {
-                    return(<tr class="table-active">
-                        <td><ImageComponent
-                    src={item.avatarImage}
-                    style={{ height: "35px", width: "35px"}}
-                    alt={item.channelName}
-                    className={"border rounded-circle"}
-                  /></td>
-                    <th scope="row">{item.channelName}</th>
-                    <td>{item.subscribersCount}</td>
-                    <td>{item.isPremium ? "true" : "false"}</td>
-                    
-                  </tr>)
-                    
+                    return (
+                      <tr class="table-active">
+                        <td>
+                          <ImageComponent
+                            src={item.avatarImage}
+                            style={{ height: "35px", width: "35px" }}
+                            alt={item.channelName}
+                            className={"border rounded-circle"}
+                          />
+                        </td>
+                        <th scope="row">{item.channelName}</th>
+                        <td>{item.subscribersCount}</td>
+                        <td>{item.isPremium ? "true" : "false"}</td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>
