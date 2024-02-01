@@ -98,22 +98,16 @@ export const userLogin=(loginData,navigate)=>{
     }
 }
 
-export const verifyUser=(navigate)=>{
+export const verifyUser=()=>{
   
     return async(dispatch)=>{
         dispatch(fetchUserRequest())
         try {
             const res = await axios.get(`${BackendUrl}/api/data/profile`,config)
             const data = await res.data;
-            //console.log("data in profile :",data)
-
             dispatch(fetchUserSuccess(data.user))
-            // if(data.status === 200){
-            // }
-
         } catch (error) {
             dispatch(fetchUserRequest(error.message))
-            //  navigate("/login")
         }
     }
 }

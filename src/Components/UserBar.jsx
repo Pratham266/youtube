@@ -8,14 +8,7 @@ import ImageComponent from './ImageComponent';
 
 const UserBar = ({handleModal}) => {
     const {user,loading}  = useSelector((state)=>state.user);
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-     dispatch(verifyUser(navigate));
-    }, []); 
-    
+    const navigate = useNavigate();    
     if(loading){
       return<SmallLoader color={"black"}/>
     }

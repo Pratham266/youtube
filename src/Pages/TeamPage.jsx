@@ -1,53 +1,76 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "../Js/functionForData";
+import { BackendUrl } from "../constants";
+import ImageComponent from "../Components/ImageComponent";
+import { addBuddyRequest, getSearchUserData } from "../API/api";
+import Loader from "../Components/Loader";
+import SearchBuddyBar from "../Components/SearchBuddyBar";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTeam } from "../redux";
+import SmallLoader from "../Components/SmallLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate, useParams } from "react-router-dom";
+import BuddyChannels from "./BuddyChannels";
 
 const TeamPage = () => {
-    
-  const searchRef = useRef(null);
+  const { team } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const debounceGetData = debounce(
-  //   (searchTerm) => dispatch(write redux function (searchTerm)),
-  //   500
-  // );
+  useEffect(() => {
+    dispatch(fetchTeam());
+  }, []);
 
-  const handleSearch = () => {
-    console.log(searchRef.current.value)
-    // debounceGetData(searchRef.current.value);
-  };
-
-  const data = [];
   return (
     <>
-      <div className="d-flex flex-column align-items-center justify-content-center md-form form-sm mt-0 p-2 bg-black">
-        <input
-          className="form-control form-control-sm ml-3 w-75 border rounded"
-          type="text"
-          ref={searchRef}
-          onFocus={handleSearch}
-          onChange={handleSearch}
-          placeholder="Search Buddy By Name"
-        />
+      <SearchBuddyBar />
 
-        {data.length !== 0 && (
-          <div className="dropdown">
-            <div
-              className="dropdown-menu show"
-              style={{
-                position: "absolute",
-                inset: "0px auto auto 0px",
-                margin: "0px",
-              }}
-            >
-              <h6 className="dropdown-header">Dropdown header</h6>
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
+      <div
+        className="d-flex justify-content-center"
+        style={{ backgroundColor: "#686565", height: "80vh" }}
+      >
+        <div className="w-25  border-dark m-2 bg-primary rounded">
+          {team?.loading ? (
+            <SmallLoader color={"white"} />
+          ) : (
+            <div className="scrollbar-ripe-malinka">
+              {team?.members.map((item) => {
+                return (
+                  <div
+                    style={{cursor: "pointer",}}
+                    class="card m-2 bg-black border-white text-white"
+                    key={item._id}
+                    onClick={() => navigate(`/team/${item.userId}`)}
+                  >
+                    <div class="card-header d-flex">
+                      <ImageComponent
+                        src={`${BackendUrl}/${item.image}`}
+                        alt={`${item.firstname}_pic`}
+                        style={{ width: "45px", height: "45px" }}
+                        className={`rounded-circle`}
+                      />
+                      <div>
+                        <span className="mx-2">
+                          {item.firstname} {item.lastname}
+                        </span>
+                        <div className="p-1">
+                          <p class="card-text">{item.email}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      <div></div>
+        <div className="w-75 border m-2 border-dark rounded bg-primary ">
+        <BuddyChannels/>
+              
+        </div>
+      </div>
     </>
   );
 };
