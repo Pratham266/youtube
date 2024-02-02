@@ -5,7 +5,7 @@ const EntryField = ({label,name,type,value,id,error,onChange,placeholder,require
   return (
     <>
       <div className="form-group">
-          <label className="form-label mt-4">
+          <label className="form-label mt-4" htmlFor={id}>
             {label}
           </label>
           <input

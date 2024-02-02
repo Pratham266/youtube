@@ -66,7 +66,7 @@ const Login = () => {
     if(validEmail && validPassword){
       dispatch(userLogin(loginData,navigate))
     }
-    
+
   };
 
   return (
@@ -106,7 +106,6 @@ const Login = () => {
           <button
             type="submit"
             className="btn btn-primary mt-2 "
-            
           >
             Login
           </button>

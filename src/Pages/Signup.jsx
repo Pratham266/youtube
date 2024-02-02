@@ -39,7 +39,7 @@ const Signup = () => {
   };
 
   const handleData = (name, value) => {
-    debounce(handleSignupData, 1000)(name, value);
+    debounce(handleSignupData, 300)(name, value);
     clearError(name);
   };
 

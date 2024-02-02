@@ -19,7 +19,7 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
 
   const debounceGetData = debounce(
     (searchTerm) => getSearchUser(searchTerm),
-    500
+    300
   );
 
 
@@ -59,10 +59,10 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
         
         <form onSubmit={handleSearch}>
           <input
-            className="form-control form-control-sm ml-3 w-25 border rounded"
+            className="form-control form-control-sm ml-3 w-25 border rounded bg-secondary text-white"
             type="text"
             ref={searchRef}
-            placeholder={`${loading ? "Please wait...." : "Add Buddy"}`}
+            placeholder={`${loading ? "Please wait...." : "Add Buddy..."}`}
           />
         </form>
 
@@ -124,11 +124,11 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
         <div className="nav-item dropdown">
           <div className="nav-link dropdown-toggle show text-white" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onClick={() => setShow(!show)}>{checkedUsers.length === 0 ? "" : checkedUsers.length} Buddies</div>
           {show ? <>
-            <div className="dropdown-menu show" style={{ position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 42.4px, 0px)" }} >
+            <div className="dropdown-menu show " style={{ position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 42.4px, 0px)" }} >
               {team?.map((item) => {
                 return (
 
-                  <div className='p-1' key={item.userId} >
+                  <div className='p-1' key={item.userId} style={{width: "max-content"}}>
 
                     {checkedUsers.includes(item.userId) ?
                       <input className="form-check-input m-1" type="checkbox" value={item.firstname} id={item.firstname}
