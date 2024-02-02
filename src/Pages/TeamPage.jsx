@@ -6,25 +6,34 @@ import { addBuddyRequest, getSearchUserData } from "../API/api";
 import Loader from "../Components/Loader";
 import SearchBuddyBar from "../Components/SearchBuddyBar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTeam } from "../redux";
+import {fetchBuddySubscribedChannels, fetchTeam } from "../redux";
 import SmallLoader from "../Components/SmallLoader";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BuddyChannels from "./BuddyChannels";
 
 const TeamPage = () => {
   const { team } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [checkedUsers, setCheckedUsers] = useState([]);
+  
+  const handleModifyBuddiesChannels =()=>{
+    dispatch(fetchBuddySubscribedChannels(checkedUsers));
+  }
+
 
   useEffect(() => {
     dispatch(fetchTeam());
+    dispatch(fetchBuddySubscribedChannels(checkedUsers));
   }, []);
+
+  if(team?.loading){
+    return (<Loader/>)
+  }
 
   return (
     <>
-      <SearchBuddyBar />
+      <SearchBuddyBar team={team?.members} checkedUsers={checkedUsers} setCheckedUsers={setCheckedUsers} handleModifyBuddiesChannels={handleModifyBuddiesChannels} />
 
       <div
         className="d-flex justify-content-center"
@@ -38,12 +47,10 @@ const TeamPage = () => {
               {team?.members.map((item) => {
                 return (
                   <div
-                    style={{cursor: "pointer",}}
-                    class="card m-2 bg-black border-white text-white"
+                    className="card m-2 bg-black border-white text-white"
                     key={item._id}
-                    onClick={() => navigate(`/team/${item.userId}`)}
                   >
-                    <div class="card-header d-flex">
+                    <div className="card-header d-flex">
                       <ImageComponent
                         src={`${BackendUrl}/${item.image}`}
                         alt={`${item.firstname}_pic`}
@@ -55,7 +62,7 @@ const TeamPage = () => {
                           {item.firstname} {item.lastname}
                         </span>
                         <div className="p-1">
-                          <p class="card-text">{item.email}</p>
+                          <p className="card-text">{item.email}</p>
                         </div>
                       </div>
                     </div>
@@ -66,9 +73,8 @@ const TeamPage = () => {
           )}
         </div>
 
-        <div className="w-75 border m-2 border-dark rounded bg-primary ">
-        <BuddyChannels/>
-              
+        <div className="w-75 border m-2 border-dark rounded bg-primary p-2">
+           <BuddyChannels/>     
         </div>
       </div>
     </>

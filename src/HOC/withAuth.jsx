@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   let isAuthenticated = false;
 
   const token = Cookies.get("token");
-  
+
   const user = useSelector((state) => state.user);
 
   if (user.user._id) isAuthenticated = true;
@@ -19,8 +19,8 @@ const PrivateRoute = ({ children }) => {
   }
 
   return <>
-   <Navbar/>
-  {children}
+    <Navbar />
+    {children}
   </>;
 };
 

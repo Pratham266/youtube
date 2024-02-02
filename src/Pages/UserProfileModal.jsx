@@ -37,7 +37,7 @@ const UserProfile = ({ handleClose }) => {
             className={`rounded-circle m-2 border border-3  ${userData.isPremium ? "border-warning":"border-dark"}`}
               alt="profile_photo"
             />
-            {userData.isPremium && <span class="badge rounded-pill bg-warning">Premium</span>}
+            {userData.isPremium && <span className="badge rounded-pill bg-warning">Premium</span>}
             <button
               type="button"
               className="btn-close"

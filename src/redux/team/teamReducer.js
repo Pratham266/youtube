@@ -15,6 +15,7 @@ const initialState = {
 const teamReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TEAM_REQUEST:
+      console.log("in fetch team requets")
       return {
         ...state,
         loading: true,

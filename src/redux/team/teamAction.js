@@ -54,21 +54,41 @@ export const fetchTeam = () => {
   };
 };
 
-export const fetchBuddyChannels = (userId)  =>{
-    return async(dispatch)=>{
-        dispatch(fetchTeamRequest());
-        try{    
-            const res =  await axios.get(`${BackendUrl}/api/buddy/buddychannels/${userId}`,config);
-            const data = await res.data;
-            console.log("res Buddy Channels : ",data)
-            if(data.status === 200){
-                dispatch(fetchBuddySubscribeChannels(data.channels))
-            }else if(data.status === 204){
-                dispatch(fetchBuddySubscribeChannels([]))
-            }
-        }catch(error){
-            console.log("error : ",error.message)
-            dispatch(fetchTeamFailure(error.message));
-        } 
-    }
+// export const fetchBuddyChannels = (userId)  =>{
+//     return async(dispatch)=>{
+//         // dispatch(fetchTeamRequest());
+//         try{    
+//             const res =  await axios.get(`${BackendUrl}/api/buddy/buddychannels/${userId}`,config);
+//             const data = await res.data;
+//             console.log("res Buddy Channels : ",data)
+//             if(data.status === 200){
+//                 dispatch(fetchBuddySubscribeChannels(data.channels))
+//             }else if(data.status === 204){
+//                 dispatch(fetchBuddySubscribeChannels([]))
+//             }
+//         }catch(error){
+//             console.log("error : ",error.message)
+//             dispatch(fetchTeamFailure(error.message));
+//         } 
+//     }
+// }
+
+export const fetchBuddySubscribedChannels = (buddies)  =>{
+  return async(dispatch)=>{
+      // dispatch(fetchTeamRequest());
+      try{    
+          const res =  await axios.post(`${BackendUrl}/api/buddy/allchannels`,{buddyId:buddies},config);
+          const data = await res.data;
+
+          console.log("buddy res: ",data)
+          if(data.status === 200){
+              dispatch(fetchBuddySubscribeChannels(data.channels))
+          }else if(data.status === 204){
+              dispatch(fetchBuddySubscribeChannels([]))
+          }
+      }catch(error){
+          console.log("error : ",error.message)
+          dispatch(fetchTeamFailure(error.message));
+      } 
+  }
 }

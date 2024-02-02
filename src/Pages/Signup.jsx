@@ -8,7 +8,7 @@ import {
 } from "../Js/Validator";
 import ErrorAtEntryField from "../Components/ErrorAtEntryField";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
 
@@ -111,6 +111,11 @@ const Signup = () => {
       setError("gender", "Gender is required");
     }
 
+
+    if (!image) {
+      console.log(image)
+      setError("image", "image is required");
+    }
     if (
       validEmail &&
       validPassword &&
@@ -119,7 +124,8 @@ const Signup = () => {
       firstname !== "" &&
       lastname !== "" &&
       gender !== "" &&
-      bday !== ""
+      bday !== "" &&
+      image
     ) {
       dispatch(userSignup({ ...signupData, image }, navigate));
     }
@@ -128,7 +134,7 @@ const Signup = () => {
   return (
     <div className="mt-4">
       <div className="col-md-8 mx-auto">
-        <form>
+        <form onSubmit={handleSignup}>
           <legend>Signup</legend>
 
           <div className="d-flex bd-highlight">
@@ -186,6 +192,7 @@ const Signup = () => {
                 id={"mobile"}
                 onChange={handleOnchange}
                 type={"number"}
+                maxlength={"10"}
                 error={errors.hasOwnProperty("mobile")}
               />
               {errors.hasOwnProperty("mobile") && (
@@ -210,7 +217,7 @@ const Signup = () => {
               )}
             </div>
             <div className="p-2 flex-fill bd-highlight">
-              {" "}
+
               <EntryField
                 label={"Confirm Password"}
                 type={"text"}
@@ -248,6 +255,7 @@ const Signup = () => {
               style={{ width: "182px" }}
             >
               <div>
+
                 <label className="form-label mt-4">Gender</label>
                 <div className="d-flex">
                   {["male", "female", "other"].map((item, index) => {
@@ -261,7 +269,9 @@ const Signup = () => {
                           id={item}
                           value={item}
                         />
-                        <label className="form-check-label">{item}</label>
+                        <label className="form-check-label" htmlFor={item}>
+                          {item}
+                        </label>
                       </div>
                     );
                   })}
@@ -280,25 +290,34 @@ const Signup = () => {
             <input
               className="form-control"
               type="file"
+              name="image"
               onChange={(e) => {
                 setImage(e.target.files[0]);
               }}
+              error={errors.hasOwnProperty("image")}
             />
-          </div>
 
+          </div>
+          {errors.hasOwnProperty("image") && (
+            <ErrorAtEntryField errorMessage={errors.image} />
+          )}
           <div className="mt-4">
             <button
               type="submit"
               className="btn btn-primary mt-2 "
-              onClick={handleSignup}
             >
               Signup
             </button>
           </div>
         </form>
         <div className="mt-2">
-        <p>Already have an account! <Link to="/login" style={{fontStyle:"italic"}}>Login Account</Link></p>
-      </div>
+          <p>
+            Already have an account!
+            <Link to="/login" style={{ fontStyle: "italic" }}>
+              Login Account
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -25,7 +25,6 @@ const SubscribeChannels = () => {
     if (sortBy && sortBy !== label) {
       setSortOrder("asc");
       setSortBy(label);
-
       return;
     }
 
@@ -41,7 +40,7 @@ const SubscribeChannels = () => {
     }
   };
 
-  //Make a copy of data prop
+
 
   let sortedData = subscribedchannels;
 
@@ -123,62 +122,3 @@ const getIcons = (label, sortBy, sortOrder) => {
 
 export default SubscribeChannels;
 
-// [
-//   {
-//       "_id": "65b21f6dbd942237aec0496a",
-//       "channelName": "TechExplorers",
-//       "description": "Unraveling the mysteries of cutting-edge technology.",
-//       "subscribersCount": 55000,
-//       "avatarImage": "https://img.freepik.com/premium-vector/gamer-youtuber-gaming-avatar-with-headphones-esport-logo_8169-260.jpg?w=2000",
-//       "isPremium": true
-//   }
-
-//   {
-//       "_id": "65b21f6dbd942237aec0496b",
-//       "channelName": "CulinaryWonders",
-//       "description": "Embark on a culinary journey with delightful recipes.",
-//       "subscribersCount": 32000,
-//       "avatarImage": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/125296371/original/653cc81872119844644e33d40f5afd9bd61743b6/create-cool-cartoon-avatars.jpg",
-//       "isPremium": false
-//   },
-//   {
-//       "_id": "65b21f6dbd942237aec0496c",
-//       "channelName": "WanderlustAdventures",
-//       "description": "Roaming the globe, one destination at a time.",
-//       "subscribersCount": 78000,
-//       "avatarImage": "https://via.placeholder.com/500x500/2ecc71/ffffff?text=WanderlustAdventures",
-//       "isPremium": true
-//   },
-//   {
-//       "_id": "65b21f6dbd942237aec0496d",
-//       "channelName": "GameMasters",
-//       "description": "Conquer virtual realms with epic gaming content.",
-//       "subscribersCount": 110000,
-//       "avatarImage": "https://via.placeholder.com/500x500/9b59b6/ffffff?text=GameMasters",
-//       "isPremium": false
-//   },
-//   {
-//       "_id": "65b21f6dbd942237aec0496e",
-//       "channelName": "SciFiEnthusiasts",
-//       "description": "Exploring the wonders of science fiction and fantasy.",
-//       "subscribersCount": 45000,
-//       "avatarImage": "https://via.placeholder.com/500x500/34495e/ffffff?text=SciFiEnthusiasts",
-//       "isPremium": true
-//   },
-//   {
-//       "_id": "65b21f6dbd942237aec0496f",
-//       "channelName": "ArtisticVisions",
-//       "description": "Immerse yourself in the world of creative expression.",
-//       "subscribersCount": 60000,
-//       "avatarImage": "https://via.placeholder.com/500x500/f39c12/ffffff?text=ArtisticVisions",
-//       "isPremium": false
-//   },
-//   {
-//       "_id": "65b21f6dbd942237aec04970",
-//       "channelName": "FitnessFanatics",
-//       "description": "Achieve your fitness goals with expert advice and workouts.",
-//       "subscribersCount": 85000,
-//       "avatarImage": "https://via.placeholder.com/500x500/1abc9c/ffffff?text=FitnessFanatics",
-//       "isPremium": true
-//   }
-// ]

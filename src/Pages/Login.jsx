@@ -59,21 +59,21 @@ const Login = () => {
     if (!validPassword) {
       setError(
         "password",
-        "Password is not valid"
+        "Password is not valid!"
       );
     }
     
     if(validEmail && validPassword){
       dispatch(userLogin(loginData,navigate))
     }
-
+    
   };
 
   return (
     <div className="mt-4">  
       <div className="col-md-8 mx-auto">
 
-      <form>
+      <form onSubmit={handleLogin}>
         <legend>Login</legend>
 
         <EntryField
@@ -106,7 +106,7 @@ const Login = () => {
           <button
             type="submit"
             className="btn btn-primary mt-2 "
-            onClick={handleLogin}
+            
           >
             Login
           </button>
