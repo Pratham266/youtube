@@ -1,8 +1,6 @@
 import axios from "axios";
 import { BackendUrl, config } from "../constants";
 
-
-
 export const getSearchUserData = async (searchTerm) => {
   try {
     const res = await axios.get(
@@ -34,12 +32,14 @@ export const decisonOnBuddyRequest=async(decision,id)=>{
       console.log(decision,id)
       const res = await axios.post(`${BackendUrl}/api/buddy/add`,{decision,token:id},config);
       const data = await res.data;
+      console.log(data)
 
       if(data.status === 200){
         alert("Accepted Successfully")
       }else{
         alert("Rejected Successfully")
       }
+
     }catch(error){
       alert("Something went wrong!")
     }

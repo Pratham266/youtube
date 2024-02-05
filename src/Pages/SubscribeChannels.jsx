@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getSubscribedData } from "../redux";
 import Loader from "../Components/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,15 +8,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Table from "../Components/Table";
 
-const SubscribeChannels = () => {
+const SubscribeChannels = (props) => {
+
   const [sortOrder, setSortOrder] = useState(null);
   const [sortBy, setSortBy] = useState(null);
-  const user = useSelector((state) => state.user);
-  const { subscribedchannels } = user;
 
-  const dispatch = useDispatch();
+  const { subscribedchannels } = props.userState;
+
+
   useEffect(() => {
-    dispatch(getSubscribedData());
+    props.getSubscribedData();
   }, []);
 
   const handleSortClick = (label) => {
@@ -27,7 +26,6 @@ const SubscribeChannels = () => {
       setSortBy(label);
       return;
     }
-
     if (sortOrder === null) {
       setSortOrder("asc");
       setSortBy(label);
@@ -59,7 +57,7 @@ const SubscribeChannels = () => {
     });
   }
 
-  if (!user?.subscribedchannels) {
+  if (!props.userState?.subscribedchannels) {
     return <Loader />;
   }
 

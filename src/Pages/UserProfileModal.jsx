@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { BackendUrl } from "../constants";
 import { toggleToPremium } from "../redux";
 
-const UserProfile = ({ handleClose }) => {
-  const userData = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+const UserProfile = ({ handleClose,userState,toggleToPremium}) => {
+  // const userData = useSelector((state) => state.user.user);
+  const userData = userState?.user
 
   const {
     _id: id,
@@ -22,7 +22,7 @@ const UserProfile = ({ handleClose }) => {
   } = userData;
 
   const handlePremium = () => {
-    dispatch(toggleToPremium());
+    toggleToPremium();
     handleClose();
   };
 
@@ -106,7 +106,7 @@ const UserProfile = ({ handleClose }) => {
                 <EntryField
                   type={"text"}
                   label={"Gender"}
-                  value={gender}
+                  value={gender === 'm'?"male":"female"}
                   disabled
                 />
               </div>

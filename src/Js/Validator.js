@@ -32,9 +32,9 @@ export const  getCurrentDate=() =>{
     console.log(date," -> ",time);
     return `${date}  ${time}`
 }
+
 export const UpdateImageUrl=(url)=>{
   console.log("inupdate : ",url)
     const updateUrl = url.split(`\\`)
     return updateUrl[1];
- 
 }

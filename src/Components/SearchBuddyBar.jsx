@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddiesChannels }) => {
+  
   const searchRef = useRef(null);
   const [searchUser, setSearchUser] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,7 +60,7 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
         
         <form onSubmit={handleSearch}>
           <input
-            className="form-control form-control-sm ml-3 w-25 border rounded bg-secondary text-white"
+            className="form-control form-control-sm ml-3 w-25 border rounded bg-secondary text-black"
             type="text"
             ref={searchRef}
             placeholder={`${loading ? "Please wait...." : "Add Buddy..."}`}

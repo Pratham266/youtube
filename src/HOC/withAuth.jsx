@@ -1,8 +1,6 @@
 import Cookies from "js-cookie";
-import { Children } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import Loader from "../Components/Loader";
 import Navbar from "../Components/Navbar";
 
 const PrivateRoute = ({ children }) => {

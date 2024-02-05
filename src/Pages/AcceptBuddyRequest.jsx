@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { decisonOnBuddyRequest } from "../API/api";
 import Loader from "../Components/Loader";
+import { useDispatch } from "react-redux";
 
-const AcceptBuddyRequest = () => {
+const AcceptBuddyRequest = ({teamState,decisonOnBuddyRequest}) => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
-  const handleInvitation = async (decision) => {
-    setLoading(true);
-    await decisonOnBuddyRequest(decision, id);
-    setLoading(false);
-    navigate("/login")
+
+  const handleInvitation = (decision) => {
+    decisonOnBuddyRequest(decision, id,navigate);
   };
 
   return (
@@ -19,7 +17,7 @@ const AcceptBuddyRequest = () => {
       style={{ height: "350px" }}
       className="d-flex align-items-center justify-content-center"
     >
-      {loading ? (
+      {teamState?.loading ? (
         <Loader />
       ) : (
         <div className="card">

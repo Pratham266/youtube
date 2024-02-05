@@ -7,12 +7,13 @@ import ImageComponent from "../Components/ImageComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const BuddyChannels = () => {
-  const team = useSelector((state) => state.team);
-  
+const BuddyChannels = ({team}) => {
+  //const team = useSelector((state) => state.team);
+  console.log("team : ",team)
   if (team?.loading) {
     return <Loader />;
   }
+
   const scrollStyle = {
     overflowY: "scroll",
     height: "550px",
@@ -36,11 +37,10 @@ const BuddyChannels = () => {
                     <th scope="col">premium</th>
                   </tr>
                 </thead>
-                   
                 <tbody>
                   {team?.subscribedChannels.map((item) => {
                     return (
-                      <tr className="table-active">
+                      <tr className="table-active" key={item.userId}>
                         <td>
                           <ImageComponent
                             src={item.avatarImage}
@@ -52,7 +52,6 @@ const BuddyChannels = () => {
                         <th scope="row">{item.channelName}</th>
                         <td>{item.subscribersCount}</td>
                         <td>{item.isPremium ? <FontAwesomeIcon icon={faCheck} /> :<FontAwesomeIcon icon={faXmark} />}</td>
-             
                       </tr>
                     );
                   })}

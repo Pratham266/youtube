@@ -133,7 +133,7 @@ export const removeUnsubscribeChannel=(channelId)=>{
             
             const res = await axios.get(`${BackendUrl}/api/data/subscribe/${channelId}`,config);
             const data = await res.data;
-            if(data.status){
+            if(data.status === 200){
                 alert("Unsubscribed successfully")
                 dispatch(unsubscribeChannel(channelId))
             }
@@ -158,7 +158,6 @@ export const getSubscribedData = ()=>{
         }catch(error){
             console.log("error")
             dispatch(fetchUserFailure(error.message))
-
         }
     }
 }
@@ -169,7 +168,7 @@ export const toggleToPremium = () =>{
             const res  = await axios.get(`${BackendUrl}/api/data/premium`,config);
             const data = await res.data;
             dispatch(toggleUpgrade(data.user))
-            alert("Upgraded")
+            alert("Success")
         }catch(error){
             dispatch(fetchUserFailure(error.message))
         }

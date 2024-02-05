@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchYoutube } from "../redux";
+// import { fetchYoutube } from "../redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -8,22 +8,25 @@ import SmallLoader from "./SmallLoader";
 import ImageComponent from "./ImageComponent";
 import Loader from "./Loader";
 
-const ListData = () => {
-  const { youtube, user } = useSelector((state) => state);
+const ListData = ({userState,youtubeState,fetchYoutube}) => {
 
+  // const { youtube, user } = useSelector((state) => state);
   const { dataId } = useParams();
+
   const scrollDiv = useRef();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchYoutube(page));
-  }, [page,user?.user?.isPremium]);
+    // dispatch(fetchYoutube(page));
+    fetchYoutube(page)
+  }, [page,userState?.user?.isPremium]);
 
   useEffect(() => {
     setPage(1)
-  }, [user?.user?.isPremium]);
+  }, [userState?.user?.isPremium]);
 
   const handleInfiniteScroll = () => {
     const container = scrollDiv.current;
@@ -57,7 +60,7 @@ const ListData = () => {
     height: "520px",
   };
 
-  if (!youtube?.data) {
+  if (!youtubeState?.data) {
     console.log("in loader");
     return <Loader />;
   }
@@ -69,13 +72,13 @@ const ListData = () => {
       id="pratham"
       className="scrollbar-ripe-malinka"
     >
-      {youtube?.data.length === 0 ? (
+      {youtubeState?.data.length === 0 ? (
         <h3 className="text-white"> No data found</h3>
       ) : (
         <></>
       )}
 
-      {youtube?.data.map((item, index) => {
+      {youtubeState?.data.map((item, index) => {
         return (
           <div key={item._id} onClick={() => navigate(`/${item._id}`)}>
             <div
@@ -113,7 +116,7 @@ const ListData = () => {
         );
       })}
 
-      {youtube?.loading ? <SmallLoader color={"white"} /> : <></>}
+      {youtubeState?.loading ? <SmallLoader color={"white"} /> : <></>}
     </div>
   );
 };

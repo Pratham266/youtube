@@ -9,6 +9,14 @@ import ErrorPage from "./Components/ErrorPage";
 import PrivateRoute from "./HOC/withAuth";
 import { useDispatch } from "react-redux";
 import { verifyUser } from "./redux";
+
+import HomeContainer from "./container/HomeContainer";
+import SubscribeChannelsContainer from "./container/SubscribeChannelsContainer";
+import TeamContainer from "./container/TeamContainer";
+import LoginContainer from "./container/LoginContainer";
+import SignupContainer from "./container/SignupContainer";
+import AcceptBuddyRequestContainer from "./container/AcceptBuddyRequestContainer";
+
 const LazyAbout  = lazy(()=>import('./Pages/About'));
 const LazyHome = lazy(()=>import ('./Pages/Home'));
 const LazyLogin = lazy(()=>import('./Pages/Login'));
@@ -31,16 +39,20 @@ function App() {
       <ErrorBoundary fallback={<ErrorText message="Opps! Some Erro Occurred"/>}>
         <Routes>
 
-          <Route exact path="/" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyHome/></Suspense></PrivateRoute>}/>
-          <Route exact path="/about" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyAbout/></Suspense></PrivateRoute>}/>
-          <Route exact path="/:dataId" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyHome/></Suspense></PrivateRoute>}/>
-          <Route exact path="/subscibe/channels" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazySubscribe/></Suspense></PrivateRoute>}/> 
-          <Route exact path="/team" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyTeamPage/></Suspense></PrivateRoute>}/> 
-          <Route exact path="/team/:userId" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyTeamPage/></Suspense></PrivateRoute>}/> 
+          <Route exact path="/" element={<PrivateRoute><Suspense fallback={<Loader/>}><HomeContainer/></Suspense></PrivateRoute>}/>
+          <Route exact path="/:dataId" element={<PrivateRoute><Suspense fallback={<Loader/>}><HomeContainer/></Suspense></PrivateRoute>}/>
+          <Route exact path="/subscibe/channels" element={<PrivateRoute><Suspense fallback={<Loader/>}><SubscribeChannelsContainer/></Suspense></PrivateRoute>}/> 
+          <Route exact path="/team" element={<PrivateRoute><Suspense fallback={<Loader/>}><TeamContainer/></Suspense></PrivateRoute>}/> 
+          <Route exact path="/team/:userId" element={<PrivateRoute><Suspense fallback={<Loader/>}><TeamContainer/></Suspense></PrivateRoute>}/> 
 
-          <Route exact path="/login" element={<Suspense fallback={<Loader/>}><LazyLogin/></Suspense>}/>
-          <Route exact path="/signup" element={<Suspense fallback={<Loader/>}><LazySignup/></Suspense>}/>
-          <Route exact path="/accept/invitation/:id" element={<Suspense fallback={<Loader/>}><LazyAcceptBuddy/></Suspense>}/>
+          <Route exact path="/login" element={<Suspense fallback={<Loader/>}><LoginContainer/></Suspense>}/>
+          <Route exact path="/signup" element={<Suspense fallback={<Loader/>}><SignupContainer/></Suspense>}/>
+
+          <Route exact path="/about" element={<PrivateRoute><Suspense fallback={<Loader/>}><LazyAbout/></Suspense></PrivateRoute>}/>
+          
+
+          <Route exact path="/accept/invitation/:id" element={<Suspense fallback={<Loader/>}><AcceptBuddyRequestContainer/></Suspense>}/>
+          
           <Route exact path="*" element={<ErrorPage/>}/>
 
         </Routes>

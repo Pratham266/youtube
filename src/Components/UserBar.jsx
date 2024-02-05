@@ -6,11 +6,16 @@ import SmallLoader from './SmallLoader';
 import { BackendUrl } from '../constants';
 import ImageComponent from './ImageComponent';
 
-const UserBar = ({handleModal}) => {
-    const {user,loading}  = useSelector((state)=>state.user);
-    const navigate = useNavigate();    
-    if(loading){
-      return<SmallLoader color={"black"}/>
+const UserBar = ({handleModal,userState}) => {
+    
+    // const {user,loading}  = useSelector((state)=>state.user);
+
+    const {user,loading}  = userState;
+    
+    const navigate = useNavigate();  
+
+    if(!userState){
+      return <SmallLoader color={"black"}/>
     }
 
   return (

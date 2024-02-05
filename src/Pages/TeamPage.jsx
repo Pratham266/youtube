@@ -5,46 +5,47 @@ import ImageComponent from "../Components/ImageComponent";
 import { addBuddyRequest, getSearchUserData } from "../API/api";
 import Loader from "../Components/Loader";
 import SearchBuddyBar from "../Components/SearchBuddyBar";
-import { useDispatch, useSelector } from "react-redux";
-import {fetchBuddySubscribedChannels, fetchTeam } from "../redux";
 import SmallLoader from "../Components/SmallLoader";
 import { useNavigate } from "react-router-dom";
 import BuddyChannels from "./BuddyChannels";
 
-const TeamPage = () => {
-  const { team } = useSelector((state) => state);
-  const dispatch = useDispatch();
+const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
+
+  const { team } = teamState;
+  console.log("team",team)
   const navigate = useNavigate();
+
   const [checkedUsers, setCheckedUsers] = useState([]);
   
   const handleModifyBuddiesChannels =()=>{
-    dispatch(fetchBuddySubscribedChannels(checkedUsers));
+    console.log("checked users:",checkedUsers)
+    fetchBuddySubscribedChannels(checkedUsers)
   }
 
 
   useEffect(() => {
-    dispatch(fetchTeam());
-    dispatch(fetchBuddySubscribedChannels(checkedUsers));
+    fetchTeam()
+    fetchBuddySubscribedChannels(checkedUsers)
   }, []);
 
-  if(team?.loading){
+  if(teamState?.loading){
     return (<Loader/>)
   }
 
   return (
     <>
-      <SearchBuddyBar team={team?.members} checkedUsers={checkedUsers} setCheckedUsers={setCheckedUsers} handleModifyBuddiesChannels={handleModifyBuddiesChannels} />
+      <SearchBuddyBar team={teamState?.members} checkedUsers={checkedUsers} setCheckedUsers={setCheckedUsers} handleModifyBuddiesChannels={handleModifyBuddiesChannels} />
 
       <div
         className="d-flex justify-content-center"
         style={{ backgroundColor: "#686565", height: "80vh" }}
       >
         <div className="w-25  border-dark m-2 bg-primary rounded">
-          {team?.loading ? (
+          {teamState?.loading ? (
             <SmallLoader color={"white"} />
           ) : (
             <div className="scrollbar-ripe-malinka">
-              {team?.members.map((item) => {
+              {teamState?.members.map((item) => {
                 return (
                   <div
                     className="card m-2 bg-black border-white text-white"
@@ -74,7 +75,7 @@ const TeamPage = () => {
         </div>
 
         <div className="w-75 border m-2 border-dark rounded bg-primary p-2">
-           <BuddyChannels/>     
+           <BuddyChannels team={teamState}/>     
         </div>
       </div>
     </>

@@ -1,27 +1,26 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
 import SmallLoader from "./SmallLoader";
-import { subscribeChannel } from "../redux";
 
-const Details = () => {
+const Details = ({youtubeState,subscribeChannel}) => {
 
   const { dataId } = useParams();
 
-  const youtubeData = useSelector((state) => state.youtube);
-  const data = getDataUsingId(youtubeData?.data, dataId);
+  // const youtubeState = useSelector((state) => state.youtube);
+  const data = getDataUsingId(youtubeState?.data, dataId);
+
   const navigate = useNavigate();
   
-  const dispatch= useDispatch()
+  // const dispatch= useDispatch()
   
   const handleSubscribe=()=>{
-    dispatch(subscribeChannel(dataId));
+    subscribeChannel(dataId);
     navigate("/")
   }
 
   
-  if(youtubeData?.loading){
+  if(youtubeState?.loading){
     return <SmallLoader color={"white"}/>
   }
 

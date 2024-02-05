@@ -3,6 +3,7 @@ import {
   FETCH_TEAM_FAILURE,
   FETCH_TEAM_REQUEST,
   FETCH_TEAM_SUCCESS,
+  INVITATION_REQUEST_FOR_BUDDY,
 } from "./teamTypes";
 
 const initialState = {
@@ -15,7 +16,6 @@ const initialState = {
 const teamReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TEAM_REQUEST:
-      console.log("in fetch team requets")
       return {
         ...state,
         loading: true,
@@ -36,12 +36,22 @@ const teamReducer = (state = initialState, action) => {
         members: [],
         error: action.payload,
       };
+      
       case FETCH_BUDDY_SUBSCRIBE_CHANNEL:
         return{
             ...state,
             loading:false,
             subscribedChannels:action.payload,
             error:``
+        }
+
+      case INVITATION_REQUEST_FOR_BUDDY:
+        return{
+          ...state,
+          loading:false,
+          subscribedChannels:state.subscribedChannels,
+          members:[...state.members,action.payload],
+          error:``,        
         }
     default:
       return state;

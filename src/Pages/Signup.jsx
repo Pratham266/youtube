@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
 
-const Signup = () => {
+const Signup = ({userSignup}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -127,7 +127,7 @@ const Signup = () => {
       bday !== "" &&
       image
     ) {
-      dispatch(userSignup({ ...signupData, image }, navigate));
+      userSignup({ ...signupData, image }, navigate);
     }
   };
 
@@ -258,7 +258,7 @@ const Signup = () => {
 
                 <label className="form-label mt-4">Gender</label>
                 <div className="d-flex">
-                  {["male", "female", "other"].map((item, index) => {
+                  {["m", "f"].map((item, index) => {
                     return (
                       <div className="form-check flex-fill mt-2" key={item}>
                         <input
@@ -270,7 +270,7 @@ const Signup = () => {
                           value={item}
                         />
                         <label className="form-check-label" htmlFor={item}>
-                          {item}
+                          {item === 'm'? "male":"female"}
                         </label>
                       </div>
                     );

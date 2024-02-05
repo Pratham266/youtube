@@ -7,12 +7,13 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../redux";
 import { debounce } from "../Js/functionForData";
 
-const Login = () => {
+const Login = ({userLogin}) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
 
   const handleLoginData =(name,value)=>{
     setLoginData((prevData) => ({
@@ -64,7 +65,8 @@ const Login = () => {
     }
     
     if(validEmail && validPassword){
-      dispatch(userLogin(loginData,navigate))
+      //dispatch(userLogin(loginData,navigate))
+      userLogin(loginData,navigate);
     }
 
   };
