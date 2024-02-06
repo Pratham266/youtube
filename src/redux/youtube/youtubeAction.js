@@ -43,16 +43,17 @@ export const removeSubscribeChannelsFromState = (dataId) => {
   };
 };
 
-
 export const fetchYoutube = (page) => {
-  
+  console.log("called : ",page)
   return async (dispatch) => {
     dispatch(fetchYoutubRequest());
     try {
+      console.log("in try")
       const res = await axios.get(
         `${BackendUrl}/api/data/suggested?_limit=${10}&_page=${page}&_searchTerm=${""}`,
         config
       );
+      console.log("data : ",res.data)
       const data = await res.data;
       dispatch(fetchYoutubeSuccess({channels:data.channels,page}));
     } catch (error) {

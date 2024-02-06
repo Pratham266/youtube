@@ -80,9 +80,10 @@ export const userLogin=(loginData,navigate)=>{
     return async(dispatch)=>{
         dispatch(fetchUserRequest())
         try{
+            console.log("in login",loginData)
             const res = await axios.post(`${BackendUrl}/api/auth/login`,loginData,config)
             const data = await res.data;
-
+            console.log("data in login: ",data)
             Cookies.set("token", res.data.token,{
                 expires: 7,
                 domain: ".custom.local",

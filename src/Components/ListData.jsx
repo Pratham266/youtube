@@ -53,6 +53,7 @@ const ListData = ({userState,youtubeState,fetchYoutube}) => {
         scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
       }
     };
+    
   }, []);
 
   const scrollStyle = {

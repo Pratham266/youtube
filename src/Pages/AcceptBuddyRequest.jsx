@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Components/Loader";
-import { useDispatch } from "react-redux";
 
-const AcceptBuddyRequest = ({teamState,decisonOnBuddyRequest}) => {
+const AcceptBuddyRequest = ({ teamState, decisonOnBuddyRequest }) => {
+
   const { id } = useParams();
 
   const navigate = useNavigate();
 
   const handleInvitation = (decision) => {
-    decisonOnBuddyRequest(decision, id,navigate);
+    decisonOnBuddyRequest(decision, id, navigate);
   };
 
   return (

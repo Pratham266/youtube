@@ -104,10 +104,13 @@ export const fetchBuddySubscribedChannels = (buddies)  =>{
 export const decisonOnBuddyRequest=(decision,id,navigate)=>{
   return async(dispatch)=>{
     dispatch(fetchTeamRequest());
+    console.log("in request: ",decision,id)
     try{
       const res = await axios.post(`${BackendUrl}/api/buddy/add`,{decision,token:id},config);
       const data = await res.data;
+
       console.log("in data :",data)
+
       if(data.status === 200){
         dispatch(invitationRequestForBuddy(data.user))
         alert("Accepted Successfully")
@@ -117,6 +120,8 @@ export const decisonOnBuddyRequest=(decision,id,navigate)=>{
       navigate("/login")
     }catch(error){
       alert("Something went wrong!")
+      navigate("/login")
+
     }
   }
 }

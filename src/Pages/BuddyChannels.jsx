@@ -9,7 +9,6 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const BuddyChannels = ({team}) => {
   //const team = useSelector((state) => state.team);
-  console.log("team : ",team)
   if (team?.loading) {
     return <Loader />;
   }
@@ -39,8 +38,9 @@ const BuddyChannels = ({team}) => {
                 </thead>
                 <tbody>
                   {team?.subscribedChannels.map((item) => {
+                  
                     return (
-                      <tr className="table-active" key={item.userId}>
+                      <tr className="table-active" key={item._id}>
                         <td>
                           <ImageComponent
                             src={item.avatarImage}
