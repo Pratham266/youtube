@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
+import ImageUpload from "../Components/ImageUpload";
 
 const Signup = ({userSignup}) => {
   const dispatch = useDispatch();
@@ -283,10 +284,12 @@ const Signup = ({userSignup}) => {
             </div>
           </div>
 
-          <div className="form-group">
+          {/* <div className="form-group">
+           
             <label className="form-label mt-4">
               Upload your Pofile Picture
             </label>
+            
             <input
               className="form-control"
               type="file"
@@ -297,7 +300,10 @@ const Signup = ({userSignup}) => {
               error={errors.hasOwnProperty("image")}
             />
 
-          </div>
+          </div> */}
+
+          <ImageUpload setImage={setImage} error={errors.hasOwnProperty("image")}/>
+
           {errors.hasOwnProperty("image") && (
             <ErrorAtEntryField errorMessage={errors.image} />
           )}
