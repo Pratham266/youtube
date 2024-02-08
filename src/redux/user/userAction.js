@@ -22,7 +22,6 @@ export const removeUnsubscribeChannel = (channelId) => {
 
 
 export const getSubscribedData = (page,nameFilter,subscribersFilter) => {
-  console.log(page,nameFilter,subscribersFilter)
   return {
     type: "FETCH_SUBSCRIBE",
     payload: axios.get(`${BackendUrl}/api/data/viewsubscribed?_limit=${6}&_page=${page}&_name=${nameFilter}&_subscribers=${subscribersFilter}`, config),
@@ -44,6 +43,7 @@ export const userLogin = (loginData,navigate)=>{
     meta:{navigate:navigate}
   }
 }
+
 export const userSignup = (signupData,navigate)=>{
 
   return{

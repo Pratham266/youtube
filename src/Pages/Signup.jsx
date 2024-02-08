@@ -71,10 +71,6 @@ const Signup = ({userSignup,userState}) => {
 }
    
 
-  const styleDiv={
-    width: "182px"
-  }
-
   if(userState?.loading){
     return <Loader/>
   }
@@ -199,8 +195,8 @@ const Signup = ({userSignup,userState}) => {
             </div>
 
             <div
-              className="p-2 flex-fill bd-highlight"
-              style={styleDiv}
+              className="p-2 flex-fill bd-highlight signup_width"
+             
             >
               <div>
 

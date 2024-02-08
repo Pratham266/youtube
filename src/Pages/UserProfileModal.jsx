@@ -11,7 +11,6 @@ const UserProfile = ({ handleClose, userState, toggleToPremium, editUser }) => {
   const userData = userState?.user
   const [editProfile, setEditProfile] = useState(false);
 
-  const { firstname, lastname, email, gender, mobile, age, birthdate, isPremium } = userData;
   const handleEditProfile = () => {
     setEditProfile(!editProfile)
   }
@@ -19,7 +18,6 @@ const UserProfile = ({ handleClose, userState, toggleToPremium, editUser }) => {
     toggleToPremium();
   };
 
-  const style = { cursor: "pointer", fontStyle: "italic", textDecoration: "underline" }
 
   return (
     <div className="modal w-full">
@@ -32,7 +30,7 @@ const UserProfile = ({ handleClose, userState, toggleToPremium, editUser }) => {
               alt="profile_photo"
             />
 
-            {<span onClick={handleEditProfile} style={style} >
+            {<span onClick={handleEditProfile} className="profile_update">
               {editProfile ? "View Profile" : "Edit Profile"}
             </span>}
 

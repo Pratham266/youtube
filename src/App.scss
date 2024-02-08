@@ -1,0 +1,140 @@
+ .profile_update {
+     cursor: pointer !important;
+     font-style: italic !important;
+     text-decoration: underline !important;
+ }
+
+ .team_parent_scroll {
+     background-color: #686565;
+     height: "80vh";
+ }
+
+ .team_scroll {
+     overflow-y: scroll;
+ }
+
+ .pointer_cursor {
+     cursor: pointer;
+ }
+
+ .signup_width {
+     width: 182px;
+ }
+
+ .main_home_bg {
+     background-color: #6c7175;
+ }
+
+ .main_home_icon {
+     color: black;
+ }
+
+ .main_home_outlet {
+     height: 87vh;
+ }
+
+ .bell_icon_befor {
+     color: #FFD43B;
+     height: 40px;
+     margin-left: 10px;
+ }
+
+ .bell_icon_after {
+    color: #FFD43B;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+ }
+
+ .details_image{
+    height: 325px; 
+    width: 525px;
+ }
+
+ .details_tag{
+    height: 25px;
+    font-size: 20px;
+ }
+
+ .list_page_scroll{
+    overflow-y: scroll;
+    height:510px;
+ }
+
+ .list_page_card{
+    max-width: 20rem;
+    cursor:pointer;
+    text-decoration: none;
+ }
+
+ .list_page_card_icon{
+    color: #FFD43B;
+ }
+
+ .loader{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+ }
+
+ .nav_bg{
+    background-color: #6c7175;
+ }
+
+ .logout_icon{
+    color: #ffffff;
+    cursor:pointer;
+ }
+
+ .search_buddy_bar{
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+ }
+
+ .search_buddy_bar_scroll{
+    overflow-y: scroll;
+    height: 300px;
+ }
+
+ .sm_loader{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+ }
+
+ .sm_loader_point{
+    height:20px;
+    width:20px;
+ }
+
+ .table_scroll{
+    overflow-y:scroll;
+    height:545px;
+ }
+
+ .table_tb{
+    height: 35px;
+    width:35px;
+ }
+
+ .img_cmp{
+    width: 60px;
+    height: 60px;
+ }
+
+ .search_buddy_bar_drop_down{
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    transform:translate3d(0px, 42.4px, 0px);
+ }
+
+ .search_buddy_bar_list_card{
+    width: max-content;
+ }
+ 
+ .team_subscribe_channels{
+    height: 75vh;
+ }

@@ -26,12 +26,12 @@ const Navbar = () => {
     debounceGetData(searchRef.current.value);
   };
   
-  const style={color: "#ffffff",cursor:"pointer"}
+  
   
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#6c7175'}}>
+      <nav className=" nav_bg navbar navbar-expand-lg">
         <div className="container-fluid">
           <Link className="navbar-brand text-black" to="/">
             socialpilot
@@ -95,8 +95,8 @@ const Navbar = () => {
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
                   size="xl"
+                  className="logout_icon"
                   onClick={handleLogout}
-                  style={style}
                   />
                   </div>
               </div>

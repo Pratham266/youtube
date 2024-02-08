@@ -62,7 +62,6 @@ const userReducer = (state = initialState, action) => {
     //   };
 
     case "FETCH_SUBSCRIBE_FULFILLED":
-      console.log(action.payload.data);
       return {
         ...state,
         loading: false,
@@ -130,7 +129,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case "USER_SIGNUP_PENDING":
-      console.log("signup pending");
+      
       return {
         ...state,
         loading: true,
@@ -141,7 +140,6 @@ const userReducer = (state = initialState, action) => {
     case "USER_SIGNUP_FULFILLED":
 
       if (action.payload.data.status === 204) {
-        console.log(action.payload);
         alert(action.payload?.data?.msg[0]?.message);
       } else if (action.payload.status === 200) {
         Cookies.set("token", action.payload.data.token, {
@@ -169,7 +167,6 @@ const userReducer = (state = initialState, action) => {
       };
 
     case "USER_LOGOUT":
-      console.log(action);
       Cookies.remove("token", { domain: ".custom.local", path: "/" });
       return {
         ...state,
@@ -178,23 +175,24 @@ const userReducer = (state = initialState, action) => {
         error: ``,
       };
 
-      // case 'USER_EDIT_PENDING':
-      //   return{
-      //     ...state,
-      //     loading:true,
-      //     status:'pending',
-      //     error:``
-      //   }
-
       case 'USER_EDIT_FULFILLED':
-        
+      if(action.payload.data.status === 200){
+        alert('Updated')
         return{
           ...state,
           loading:false,
           status:'success',
           user:action.payload.data.user,
         }
-
+      }else if(action.payload.data.status === 204){
+        alert(action.payload?.data?.msg[0]?.message)
+        return{
+          ...state,
+          loading:false,
+          status:'success'
+        }
+      }
+  
       case 'USER_EDIT_REJECTED':
         return{
           ...state,

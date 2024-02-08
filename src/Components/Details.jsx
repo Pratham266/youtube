@@ -24,11 +24,6 @@ const Details = ({youtubeState,subscribeChannel}) => {
     return <SmallLoader color={"white"}/>
   }
 
-  const style={
-    image:{ height: "325px", width: "525px" },
-    tag:{ height: "25px", fontSize: "20px" }
-  }
-
   return (
     <>
       {!dataId ? (
@@ -50,8 +45,7 @@ const Details = ({youtubeState,subscribeChannel}) => {
                 <img
                   src={data?.avatarImage}
                   alt={data?.avatarImage}
-                  style={style.image}
-                  className={"rounded"}
+                  className={"details_image rounded"}
                 />
               </div>
 
@@ -71,8 +65,8 @@ const Details = ({youtubeState,subscribeChannel}) => {
               {data?.channelName} &nbsp;
               {data?.isPremium && (
                 <span
-                  className="badge rounded-pill bg-warning"
-                  style={style.tag}
+                  className="details_tag badge rounded-pill bg-warning"
+
                 >
                   Pro
                 </span>

@@ -11,7 +11,6 @@ const TableData = ({ data }) => {
   const handleUnsubscribe = (id) => {
     dispatch(removeUnsubscribeChannel(id))
   }
-  const style={cr:{cursor:'pointer'}}
 
   return (
 <tbody>
@@ -34,7 +33,7 @@ const TableData = ({ data }) => {
             )}
           </td>
           <td>{item.subscribersCount}</td>
-          <td><span className="badge rounded-pill bg-danger" style={style.cr} onClick={() => { handleUnsubscribe(item.channelId) }}>UNSUBSCRIBE</span></td>
+          <td><span className="pointer_cursor badge rounded-pill bg-danger" onClick={() => { handleUnsubscribe(item.channelId) }}>UNSUBSCRIBE</span></td>
         </tr>
       )
     })}

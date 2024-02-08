@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import Navbar from "../Components/Navbar";
 
 const PrivateRoute = ({ children }) => {
   let isAuthenticated = false;
@@ -17,7 +16,7 @@ const PrivateRoute = ({ children }) => {
   }
 
   return <>
-    <Navbar />
+    
     {children}
   </>;
 };

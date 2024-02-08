@@ -28,12 +28,7 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
     fetchBuddySubscribedChannels(checkedUsers)
   }, []);
 
-  const StyleDiv={
-    parent:{backgroundColor: "#686565", 
-    height: "80vh",},
-    scroll:{overflowY: "scroll"}
-  }
-
+  
   if(teamState?.status === 'pending'){
     return (<Loader/>)
   }
@@ -43,10 +38,10 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
       <SearchBuddyBar team={teamState?.members} checkedUsers={checkedUsers} setCheckedUsers={setCheckedUsers} handleModifyBuddiesChannels={handleModifyBuddiesChannels} />
 
       <div
-        className="d-flex justify-content-center "
-        style={StyleDiv.parent}
+        className="d-flex justify-content-center team_parent_scroll"
+        
       >
-        <div className="w-25 scrollbar-ripe-malinka border-dark m-2 bg-primary rounded" style={StyleDiv.scroll}>
+        <div className="w-25 scrollbar-ripe-malinka border-dark m-2 bg-primary rounded team_scroll">
           {teamState?.loading ? (
             <SmallLoader color={"white"} />
           ) : (
@@ -79,7 +74,7 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
           )}
         </div>
 
-        <div className="w-75 border m-2 border-dark rounded bg-primary p-2">
+        <div className="w-75 border m-2 border-dark rounded bg-primary p-2 team_subscribe_channels">
            <BuddyChannels team={teamState}/>     
         </div>
       </div>

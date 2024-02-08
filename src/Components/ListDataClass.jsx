@@ -59,16 +59,7 @@ class ListDataClass extends React.Component {
 
         const {youtubeState,navigate,dataId} = this.props;
 
-        const style = {
-            scroll:{overflowY: "scroll",
-            height: "510px",},
-            div:{
-                maxWidth: "20rem",
-                cursor: "pointer",
-                textDecoration: "none",
-            },
-            icon:{ color: "#FFD43B" }
-        };
+     
 
         if (!youtubeState?.data) {
             console.log("in loader");
@@ -77,9 +68,8 @@ class ListDataClass extends React.Component {
 
         return (
             <div
-                style={style.scroll}
                 ref={this.scrollDiv}
-                className="scrollbar-ripe-malinka"
+                className="list_page_scroll scrollbar-ripe-malinka"
             >
                 {youtubeState?.data.length === 0 ? (
                     <h3 className="text-white"> No data found</h3>
@@ -91,9 +81,9 @@ class ListDataClass extends React.Component {
                     return (
                         <div key={item.channelId} onClick={() => navigate(`/${item.channelId}`)}>
                             <div
-                                className={`card text-white  rounded border-white m-2 ${item.channelId === dataId ? "bg-dark" : "bg-black"
+                                className={` list_page_card card text-white  rounded border-white m-2 ${item.channelId === dataId ? "bg-dark" : "bg-black"
                                     }`}
-                                style={style.div}
+                                
                             >
                                 <div className="d-flex ">
                                     <ImageComponent
@@ -105,9 +95,10 @@ class ListDataClass extends React.Component {
                                         {item.channelName} &nbsp;
                                         {item.isPremium && (
                                             <FontAwesomeIcon
+                                            className="list_page_card_icon"
                                                 icon={faStar}
                                                 beat
-                                                style={style.icon}
+                                                
                                             />
                                         )}
                                     </div>

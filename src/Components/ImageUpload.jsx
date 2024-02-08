@@ -27,12 +27,12 @@ const ImageUpload = ({ setImage ,clearError}) => {
     }, [])
 
     return (
-        <div className="form-group"  style={{ cursor: 'pointer' }} onClick={(e) => {
+        <div className="form-group pointer_cursor"  onClick={(e) => {
             e.preventDefault();
             return widgetRef.current.open();
         }}>
 
-            <label className="form-label mt-4">
+            <label className="form-label pointer_cursor mt-4">
                 Upload your Pofile Picture
             </label>
 

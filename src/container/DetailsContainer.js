@@ -7,7 +7,6 @@ const mapStateToProps = state=>({
 
 const mapDispatchToProps = dispatch=>({
     subscribeChannel:dataId=>{
-        console.log("yes in")
         dispatch(subscribeChannel(dataId))
     }
 }) 

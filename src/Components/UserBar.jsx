@@ -18,20 +18,14 @@ const UserBar = ({handleModal,userState}) => {
       return <SmallLoader color={"black"}/>
     }
 
-    const style={
-      image:{
-        width: "60px", height: "60px" 
-      }
-    }
-    
   return (
     <div className="w-full p-2 text-white bg-black ">
     <div className="d-flex flex-row">
       <div className="p-2">
         {user && <ImageComponent
           src={user.image}
-          className="rounded-circle"
-          style={style.image}
+          className=" img_cmp rounded-circle"
+          
           alt="profile_photo"
         />}
         

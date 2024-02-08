@@ -55,14 +55,7 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
 
   }
 
-  const style={
-    div:{
-      position: "absolute",
-      inset: "0px auto auto 0px",
-      margin: "0px",
-    },
-    scroll:{ overflowY: "scroll", height: "300px" }
-  }
+ 
 
   return (
     <div className="d-flex flex align-items-center md-form form-sm mt-0 p-2 bg-black">
@@ -81,15 +74,15 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
 
           <div className="dropdown">
             <div
-              className="dropdown-menu show border-2"
-              style={style.div}
+              className=" search_buddy_bar dropdown-menu show border-2"
+              
             >
               <div className='d-flex justify-content-between'>
               <h6 className="dropdown-header text-black"> Buddies</h6>
               <h6 className="dropdown-header cursor-pointer" onClick={()=>setShowBuddy(!showBuddy)}> <FontAwesomeIcon icon={faXmark}  size="xl" /> </h6>
               </div>
               
-              <div className="scrollbar-ripe-malink" style={style.scroll}>
+              <div className="earch_buddy_bar_scroll scrollbar-ripe-malink">
 
                 {searchUser.map((item) => {
                   return (
@@ -134,11 +127,11 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
           </span>
           </div>
           {show ? <>
-            <div className="dropdown-menu show " style={{ position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 42.4px, 0px)" }} >
+            <div className=" search_buddy_bar_drop_down dropdown-menu show ">
               {team?.map((item) => {
                 return (
 
-                  <div className='p-1' key={item.userId} style={{width: "max-content"}}>
+                  <div className=' search_buddy_bar_list_card p-1' key={item.userId}>
 
                     {checkedUsers.includes(item.userId) ?
                       <input className="form-check-input m-1" type="checkbox" value={item.firstname} id={item.firstname}
