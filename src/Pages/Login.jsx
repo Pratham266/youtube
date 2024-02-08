@@ -6,14 +6,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../redux";
 import { debounce } from "../Js/functionForData";
+import Loader from "../Components/Loader";
 
-const Login = ({userLogin}) => {
+const Login = ({userLogin,userState}) => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   
   const navigate = useNavigate();
 
-  // const dispatch = useDispatch();
+ 
 
   const handleLoginData =(name,value)=>{
     setLoginData((prevData) => ({
@@ -23,7 +24,7 @@ const Login = ({userLogin}) => {
   }
 
   const handleData = (name,value) =>{
-    debounce(handleLoginData,1000)(name,value);
+    debounce(handleLoginData,300)(name,value);
     clearError(name);
   }
   
@@ -65,12 +66,15 @@ const Login = ({userLogin}) => {
     }
     
     if(validEmail && validPassword){
-      //dispatch(userLogin(loginData,navigate))
       userLogin(loginData,navigate);
     }
 
   };
 
+  if(userState?.loading){
+    return <Loader/>
+  }
+  
   return (
     <div className="mt-4">  
       <div className="col-md-8 mx-auto">
@@ -114,7 +118,7 @@ const Login = ({userLogin}) => {
         </div>
       </form>
       <div className="mt-2">
-        <p>Don't have an account yet! <Link to="/signup" style={{fontStyle:"italic"}}>Create Account</Link></p>
+        <p>Don't have an account yet! <Link to="/sp/signup" className="fst-italic">Create Account</Link></p>
       </div>
       </div>
       

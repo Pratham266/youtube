@@ -12,23 +12,28 @@ const Bell = ({ dataId }) => {
     }, 1000);
   };
 
+  const style={
+    iconBefore:{ color: "#FFD43B", height: "40px", marginLeft: "10px" },
+    iconAfter:{
+      color: "#FFD43B",
+      height: "40px",
+      marginLeft: "10px",
+      cursor: "pointer",
+    }
+  }
+
   return (
     <>
       {bell ? (
         <FontAwesomeIcon
           icon={faBell}
           shake
-          style={{ color: "#FFD43B", height: "40px", marginLeft: "10px" }}
+          style={style.iconBefore}
         />
       ) : (
         <FontAwesomeIcon
           icon={faBell}
-          style={{
-            color: "#FFD43B",
-            height: "40px",
-            marginLeft: "10px",
-            cursor: "pointer",
-          }}
+          style={style.iconAfter}
           onClick={() => {
             handleBell(dataId);
           }}

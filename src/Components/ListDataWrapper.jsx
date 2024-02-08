@@ -9,7 +9,7 @@ const ListDataWrapper = ({userState,youtubeState,fetchYoutube}) => {
   return (
     <ListDataClass userState={userState} youtubeState={youtubeState} fetchYoutube={fetchYoutube} dataId={dataId} navigate={navigate}/>
   )
-  
+
 }
 
 export default ListDataWrapper

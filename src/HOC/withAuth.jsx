@@ -13,7 +13,7 @@ const PrivateRoute = ({ children }) => {
   if (user.user._id) isAuthenticated = true;
 
   if (!isAuthenticated && !token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/sp/login" />;
   }
 
   return <>

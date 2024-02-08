@@ -4,7 +4,7 @@ import { debounce } from '../Js/functionForData';
 import ImageComponent from './ImageComponent';
 import { BackendUrl } from '../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddiesChannels }) => {
   
@@ -52,6 +52,16 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
     } else {
       setCheckedUsers([...checkedUsers, userId]);
     }
+
+  }
+
+  const style={
+    div:{
+      position: "absolute",
+      inset: "0px auto auto 0px",
+      margin: "0px",
+    },
+    scroll:{ overflowY: "scroll", height: "300px" }
   }
 
   return (
@@ -72,34 +82,29 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
           <div className="dropdown">
             <div
               className="dropdown-menu show border-2"
-              style={{
-                position: "absolute",
-                inset: "0px auto auto 0px",
-                margin: "0px",
-              }}
+              style={style.div}
             >
               <div className='d-flex justify-content-between'>
               <h6 className="dropdown-header text-black"> Buddies</h6>
-              <h6 className="dropdown-header" style={{cursor:"pointer"}} onClick={()=>setShowBuddy(!showBuddy)}> <FontAwesomeIcon icon={faXmark} style={{color: "#000000"}} size="xl" /> </h6>
+              <h6 className="dropdown-header cursor-pointer" onClick={()=>setShowBuddy(!showBuddy)}> <FontAwesomeIcon icon={faXmark}  size="xl" /> </h6>
               </div>
-              <div className="scrollbar-ripe-malink" style={{ overflowY: "scroll", height: "300px" }}>
+              
+              <div className="scrollbar-ripe-malink" style={style.scroll}>
 
                 {searchUser.map((item) => {
                   return (
                     <div
                       key={item.userId}
-                      className="dropdown-item border border-primay"
-                      style={{ cursor: "pointer" }}
+                      className="dropdown-item border border-primay cursor-pointer"
                       onClick={() => handleSearchAddBuddy(item.userId)}
                     >
                       <div className="d-flex">
 
                         <div>
                           <ImageComponent
-                            src={`${BackendUrl}/${item.image}`}
+                            src={item.image}
                             alt={`${item.firstname}_pic`}
-                            style={{ width: "35px", height: "35px" }}
-                            className={`rounded-circle`}
+                            className={`rounded-circle img-profile`}
                           />
                         </div>
 
@@ -123,7 +128,11 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
 
       <div>
         <div className="nav-item dropdown">
-          <div className="nav-link dropdown-toggle show text-white" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onClick={() => setShow(!show)}>{checkedUsers.length === 0 ? "" : checkedUsers.length} Buddies</div>
+          <div className="nav-link  show text-white" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onClick={() => setShow(!show)}>{checkedUsers.length === 0 ? "" : checkedUsers.length} Buddies
+          <span className='px-1'>
+          {show ? <FontAwesomeIcon icon={faCaretDown}/>:<FontAwesomeIcon icon={faCaretUp} />}
+          </span>
+          </div>
           {show ? <>
             <div className="dropdown-menu show " style={{ position: "absolute", inset: "0px auto auto 0px", margin: "0px", transform: "translate3d(0px, 42.4px, 0px)" }} >
               {team?.map((item) => {

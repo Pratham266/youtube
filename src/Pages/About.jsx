@@ -2,9 +2,9 @@ import React from "react";
 
 const About = () => {
   return (
-    <div>
-      <h1>About page</h1>
-      <p className="m-4 p-4">
+    <div className="m-4 text-white">
+      <h1 className="text-white">About page</h1>
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id
         condimentum lorem. Sed auctor massa ac leo tincidunt malesuada. Nam
         tincidunt libero sed ligula pellentesque, vitae vehicula tellus maximus.
@@ -27,22 +27,7 @@ const About = () => {
         luctus nibh ullamcorper. Sed bibendum at ipsum eu aliquet. In lacinia
         eros leo, non tincidunt diam porta id. Class aptent taciti sociosqu ad
         litora torquent per conubia nostra, per inceptos himenaeos. Aenean
-        lacinia libero nibh, vitae laoreet dui feugiat ut. Integer ut lorem
-        volutpat, sollicitudin lacus non, tincidunt est. Sed sit amet arcu
-        tellus. Donec a venenatis eros. Pellentesque habitant morbi tristique
-        senectus et netus et malesuada fames ac turpis egestas. Nunc vehicula
-        libero quam, eu ultrices arcu congue nec. Proin eu suscipit elit. Sed
-        vehicula quam vel augue congue, eget tempor nulla dignissim. Phasellus
-        nec magna pretium tortor sagittis euismod. Nulla ac ex sed mauris
-        facilisis dapibus. Aliquam pharetra ut justo sed maximus. Sed id diam
-        condimentum, malesuada est id, laoreet felis. Morbi vitae lobortis mi.
-        Integer porta tortor nisi, sit amet dapibus sapien malesuada nec. Sed et
-        odio ac sem rutrum pellentesque. Vivamus et neque tincidunt, tempor odio
-        sit amet, maximus nunc. Vestibulum vitae pulvinar diam, sit amet tempus
-        ante. Nam fermentum, sem et pharetra interdum, ipsum nisi consectetur
-        quam, sit amet pulvinar lectus felis nec orci. Morbi eget ipsum
-        accumsan, lobortis magna id, mattis turpis. Phasellus placerat augue ac
-        sem molestie luctus. Mauris id pretium tellus. Quisque pulvinar urna
+        lacinia 
         eget mauris ultricies feugiat. Fusce efficitur pellentesque libero, vel
         porttitor risus fermentum quis. Maecenas fermentum diam in odio
         imperdiet iaculis. Integer facilisis aliquet tellus, viverra euismod
@@ -76,22 +61,7 @@ const About = () => {
         finibus quam. Praesent finibus, nulla pulvinar iaculis posuere, nunc
         magna tincidunt ante, vel rhoncus augue lacus sit amet dui. Morbi
         condimentum ut tellus in molestie. Sed feugiat eget metus in pulvinar.
-        Suspendisse pulvinar fringilla ultricies. Nunc quam est, lacinia vitae
-        lorem ac, facilisis efficitur nulla. In hac habitasse platea dictumst.
-        Duis diam elit, accumsan a leo nec, ullamcorper accumsan purus.
-        Curabitur gravida volutpat lacinia. Nullam et purus commodo, iaculis
-        metus eget, volutpat eros. Curabitur hendrerit arcu quis ex aliquet, nec
-        lacinia nunc posuere. Sed in ornare massa. Pellentesque habitant morbi
-        tristique senectus et netus et malesuada fames ac turpis egestas.
-        Phasellus in elementum orci. Integer ornare varius metus, dignissim
-        facilisis velit molestie eget. Mauris eu tempor massa. Maecenas
-        malesuada enim vel augue finibus laoreet. Donec gravida, eros vitae
-        dapibus ullamcorper, neque arcu aliquam odio, facilisis bibendum metus
-        est eget dui. Vestibulum consectetur dapibus nisi, ut interdum tortor
-        tempor quis. Sed at vestibulum odio. Nullam ultricies viverra enim vel
-        varius. Maecenas vel nisl ex. Cras suscipit, nisi at euismod eleifend,
-        elit ipsum pretium lectus, ac pretium mauris dui sit amet quam.
-      </p>
+        Suspendisse pulvinar fringilla ultricies.</p>
     </div>
   );
 };

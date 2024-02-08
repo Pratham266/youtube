@@ -51,7 +51,7 @@ class ListDataClass extends React.Component {
 
     componentWillUnmount(){
         if (this.scrollDiv && this.scrollDiv.current) {
-            this.scrollDiv.current.removeEventListener("scroll", handleInfiniteScroll);
+            this.scrollDiv.current.removeEventListener("scroll", this.handleInfiniteScroll);
           }
     }
 
@@ -59,9 +59,15 @@ class ListDataClass extends React.Component {
 
         const {youtubeState,navigate,dataId} = this.props;
 
-        const scrollStyle = {
-            overflowY: "scroll",
-            height: "520px",
+        const style = {
+            scroll:{overflowY: "scroll",
+            height: "510px",},
+            div:{
+                maxWidth: "20rem",
+                cursor: "pointer",
+                textDecoration: "none",
+            },
+            icon:{ color: "#FFD43B" }
         };
 
         if (!youtubeState?.data) {
@@ -71,9 +77,8 @@ class ListDataClass extends React.Component {
 
         return (
             <div
-                style={scrollStyle}
+                style={style.scroll}
                 ref={this.scrollDiv}
-                id="pratham"
                 className="scrollbar-ripe-malinka"
             >
                 {youtubeState?.data.length === 0 ? (
@@ -84,22 +89,17 @@ class ListDataClass extends React.Component {
 
                 {youtubeState?.data.map((item, index) => {
                     return (
-                        <div key={item._id} onClick={() => navigate(`/${item._id}`)}>
+                        <div key={item.channelId} onClick={() => navigate(`/${item.channelId}`)}>
                             <div
-                                className={`card text-white  rounded border-white m-2 ${item._id === dataId ? "bg-dark" : "bg-black"
+                                className={`card text-white  rounded border-white m-2 ${item.channelId === dataId ? "bg-dark" : "bg-black"
                                     }`}
-                                style={{
-                                    maxWidth: "20rem",
-                                    cursor: "pointer",
-                                    textDecoration: "none",
-                                }}
+                                style={style.div}
                             >
                                 <div className="d-flex ">
                                     <ImageComponent
                                         src={item.avatarImage}
-                                        style={{ height: "40px", width: "40px", margin: "5px" }}
                                         alt={item.channelName}
-                                        className={"border rounded-circle"}
+                                        className={"border rounded-circle img-profile m-1"}
                                     />
                                     <div className="card-header">
                                         {item.channelName} &nbsp;
@@ -107,7 +107,7 @@ class ListDataClass extends React.Component {
                                             <FontAwesomeIcon
                                                 icon={faStar}
                                                 beat
-                                                style={{ color: "#FFD43B" }}
+                                                style={style.icon}
                                             />
                                         )}
                                     </div>
@@ -126,3 +126,28 @@ class ListDataClass extends React.Component {
 
 
 export default ListDataClass;
+
+
+
+/*
+
+add a middlware for pending,fullfill,reject in redux, --> done
+
+add a layout route for the private and public  ---> done
+
+create a scss for the all component ---> done 
+
+loader from the redux state in userBar   ---> done
+
+in userprofile set useEffect in handlecolse --->done
+
+update the profile modal and remve the entryprofile and update the profile also  ---> done
+
+in /:dataId path add only Details component   ---> check
+
+update a sorting fun. using backend api in channel name default32e asc: and in count : desc ---> done
+
+create a differrnt component  name TableHeade in table. ---> done
+
+*/
+

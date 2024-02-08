@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import Home from "../Pages/Home"
-import { fetchYoutube, subscribeChannel, toggleToPremium } from "../redux";
+import { editUser, fetchYoutube, subscribeChannel, toggleToPremium } from "../redux";
 
 const mapStateToProps = state=>({
     userState:state.user,
@@ -15,8 +15,10 @@ const mapDispatchToProps = dispatch=>({
         dispatch(fetchYoutube(page));
     },
     subscribeChannel:dataId=>{
-        console.log("yes in")
         dispatch(subscribeChannel(dataId))
+    },
+    editUser:(user)=>{
+        dispatch(editUser(user));
     }
 }) 
 

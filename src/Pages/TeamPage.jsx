@@ -9,6 +9,7 @@ import SmallLoader from "../Components/SmallLoader";
 import { useNavigate } from "react-router-dom";
 import BuddyChannels from "./BuddyChannels";
 
+
 const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
 
   const { team } = teamState;
@@ -18,7 +19,6 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
   const [checkedUsers, setCheckedUsers] = useState([]);
   
   const handleModifyBuddiesChannels =()=>{
-    console.log("checked users:",checkedUsers)
     fetchBuddySubscribedChannels(checkedUsers)
   }
 
@@ -28,7 +28,13 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
     fetchBuddySubscribedChannels(checkedUsers)
   }, []);
 
-  if(teamState?.loading){
+  const StyleDiv={
+    parent:{backgroundColor: "#686565", 
+    height: "80vh",},
+    scroll:{overflowY: "scroll"}
+  }
+
+  if(teamState?.status === 'pending'){
     return (<Loader/>)
   }
 
@@ -37,10 +43,10 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
       <SearchBuddyBar team={teamState?.members} checkedUsers={checkedUsers} setCheckedUsers={setCheckedUsers} handleModifyBuddiesChannels={handleModifyBuddiesChannels} />
 
       <div
-        className="d-flex justify-content-center"
-        style={{ backgroundColor: "#686565", height: "80vh" }}
+        className="d-flex justify-content-center "
+        style={StyleDiv.parent}
       >
-        <div className="w-25  border-dark m-2 bg-primary rounded">
+        <div className="w-25 scrollbar-ripe-malinka border-dark m-2 bg-primary rounded" style={StyleDiv.scroll}>
           {teamState?.loading ? (
             <SmallLoader color={"white"} />
           ) : (
@@ -53,10 +59,9 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
                   >
                     <div className="card-header d-flex">
                       <ImageComponent
-                        src={`${BackendUrl}/${item.image}`}
+                        src={item.image}
                         alt={`${item.firstname}_pic`}
-                        style={{ width: "45px", height: "45px" }}
-                        className={`rounded-circle`}
+                        className={` img-profile rounded-circle `}
                       />
                       <div>
                         <span className="mx-2">

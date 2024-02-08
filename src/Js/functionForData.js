@@ -8,3 +8,7 @@ export const debounce = (fn, d) => {
     };
 };
 
+
+export const giveKeysOfArrayOfObject = (data)=>{
+  return Object.keys(data)
+}

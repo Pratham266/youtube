@@ -1,63 +1,56 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../Components/Loader";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSort,
-  faSortDown,
-  faSortUp,
-} from "@fortawesome/free-solid-svg-icons";
-import Table from "../Components/Table";
+import Tabel from "../Components/Tabel";
 
 const SubscribeChannels = (props) => {
 
-  const [sortOrder, setSortOrder] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
-
   const { subscribedchannels } = props.userState;
+  const fieldNameForSorting = ['channelName', 'subscribersCount']
+  const [page,setPage]=useState(1);
 
+  const [filter,setFilter] = useState({name:'asc',subscribers:'desc'})
 
   useEffect(() => {
-    props.getSubscribedData();
-  }, []);
+    console.log("in subscribe channel  :",page,filter.name,filter.subscribers)
+    props.getSubscribedData(page,filter.name,filter.subscribers);
+  }, [page,filter]);
 
-  const handleSortClick = (label) => {
-    if (sortBy && sortBy !== label) {
-      setSortOrder("asc");
-      setSortBy(label);
-      return;
-    }
-    if (sortOrder === null) {
-      setSortOrder("asc");
-      setSortBy(label);
-    } else if (sortOrder === "asc") {
-      setSortOrder("desc");
-      setSortBy(label);
-    } else if (sortOrder === "desc") {
-      setSortOrder(null);
-      setSortBy(null);
-    }
-  };
+  
+  let pageDemo = 1;
+  const pages = [];
 
-
-
-  let sortedData = subscribedchannels;
-
-  if (sortBy && sortOrder) {
-    sortedData = [...subscribedchannels].sort((a, b) => {
-      const valueA = a[sortBy];
-      const valueB = b[sortBy];
-
-      const reverseOrder = sortOrder === "asc" ? 1 : -1;
-
-      if (typeof valueA === "string") {
-        return valueA.localeCompare(valueB) * reverseOrder;
-      } else {
-        return (valueA - valueB) * reverseOrder;
-      }
-    });
+  while (pageDemo <= props.userState?.page) {
+    pages.push(pageDemo);
+    pageDemo++; 
+  }
+  const handleSetPageInc =()=>{
+    if(page===props.userState?.page) return;
+    setPage((prev)=>prev+1)
+  }
+  
+  const handleSetPageDec=()=>{
+    if(page===1) return;
+    setPage((prev)=>prev-1)
   }
 
-  if (!props.userState?.subscribedchannels) {
+  const handelFilter=(fieldname)=>{
+
+    console.log(fieldname)
+    if(fieldname === 'channelName'){
+      let setOrder = filter.name === 'asc'?'desc':'asc';
+      setFilter((prev)=>({...prev,name:setOrder}))
+    }
+
+    if(fieldname === 'subscribersCount'){
+      let setOrder = filter.subscribers === 'desc'?'asc':'desc';
+      console.log(setOrder)
+      setFilter((prev)=>({...prev,subscribers:setOrder}))
+      console.log(filter)
+    }
+
+  }
+
+  if (props.userState?.status === 'pending') {
     return <Loader />;
   }
 
@@ -66,56 +59,34 @@ const SubscribeChannels = (props) => {
       <div className="bg-black m-2">
         <h1 className="text-center text-white">subscibed channels</h1>
       </div>
+      {subscribedchannels.length === 0?<h1 className="text-white">No Subscribed Channels Yet!</h1>
+      :
+      <>
+       <Tabel subscribedchannels={subscribedchannels} fieldNameForSorting={fieldNameForSorting} handelFilter={handelFilter} filter={filter}/>      
+        <ul className="pagination pagination-sm mx-2">
+          <li className="page-item" onClick={handleSetPageDec}>
+            <p className="page-link" style={{cursor:'pointer'}}>&laquo;</p>
+          </li>
 
-      <table className="table table-hover border-black">
-        <thead>
-          <tr>
-            <th scope="col">Profile</th>
-            <th
-              scope="col"
-              onClick={() => {
-                handleSortClick("channelName");
-              }}
-            >
-              <span className="me-2">Name</span>
-              {getIcons("channelName", sortBy, sortOrder)}
-            </th>
-            <th scope="col">Premium</th>
-            <th
-              scope="col"
-              onClick={() => {
-                handleSortClick("subscribersCount");
-              }}
-            >
-              <span className="me-2">Subscribers</span>
-              {getIcons("subscribersCount", sortBy, sortOrder)}
-            </th>
-            <th>
-              
-            </th>
-          </tr>
-        </thead>
+          {pages.map((item)=>{
+              return(
+                <>
+                <li className={`page-item ${item === page ? 'active':''}`} key={item}>
+                  <p className="page-link">{item}</p>
+                </li>
+                </>)
+          })}
 
-        <tbody>
-          <Table data={sortedData} />
-        </tbody>
-      </table>
+          <li className="page-item " onClick={handleSetPageInc}>
+            <p className="page-link" style={{cursor:'pointer'}}>&raquo;</p>
+          </li>
+
+        </ul>
+      </>}
+
+     
     </>
   );
-};
-
-const getIcons = (label, sortBy, sortOrder) => {
-  if (label !== sortBy) {
-    return <FontAwesomeIcon icon={faSort} />;
-  }
-
-  if (sortOrder === null) {
-    return <FontAwesomeIcon icon={faSort} />;
-  } else if (sortOrder === "asc") {
-    return <FontAwesomeIcon icon={faSortUp} />;
-  } else if (sortOrder === "desc") {
-    return <FontAwesomeIcon icon={faSortDown} />;
-  }
 };
 
 export default SubscribeChannels;

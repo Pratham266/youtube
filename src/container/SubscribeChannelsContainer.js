@@ -7,8 +7,8 @@ const mapStateToProps = state=>({
     
 })
 const mapDispatchToProps = dispatch =>({
-    getSubscribedData:()=>{
-        dispatch(getSubscribedData());
+    getSubscribedData:(page,nameFilter,subscribersFilter)=>{
+        dispatch(getSubscribedData(page,nameFilter,subscribersFilter));
     }
 })
 

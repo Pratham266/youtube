@@ -38,3 +38,121 @@ export const UpdateImageUrl=(url)=>{
     const updateUrl = url.split(`\\`)
     return updateUrl[1];
 }
+
+
+export const validateAllFieldsUser = (signupData,setError,image)=>{
+    const {
+      firstname,
+      lastname,
+      email,
+      password,
+      cpassword,
+      bday,
+      mobile,
+      gender,
+    } = signupData;
+
+    const validEmail = isValidEmail(email);
+    const validPassword = isValidPassword(password);
+    const validMonumber = isValidPhonenumber(mobile);
+
+    if (!validEmail) {
+      setError("email", "email is not valid!");
+    }
+
+    if (!validPassword) {
+      setError("password", "Create Strong Password");
+    }
+
+    if (!validMonumber) {
+      setError("mobile", "Mobile Number length is 10 digit.");
+    }
+
+    if (firstname === "") {
+      setError("firstname", "fill this field");
+    }
+    if (lastname === "") {
+      setError("lastname", "fill this field");
+    }
+
+    if (cpassword === "") {
+      setError("cpassword", "Confirm Password is required");
+    }
+
+    if (password !== cpassword) {
+      setError("cpassword", "Passwords are not match");
+    }
+    if (bday === "") {
+      setError("bday", "Please select the Birthdate");
+    }
+    if (gender === "") {
+      setError("gender", "Gender is required");
+    }
+
+    if (!image) {
+      console.log(image)
+      setError("image", "image is required");
+    }
+
+    if (
+      validEmail &&
+      validPassword &&
+      validMonumber &&
+      password === cpassword &&
+      firstname !== "" &&
+      lastname !== "" &&
+      gender !== "" &&
+      bday !== "" &&
+      image
+    ) {
+      console.log({ ...signupData, image })
+      return true;
+      //userSignup({ ...signupData, image }, navigate);
+    }
+    return false
+}
+export const validateAllEditUser = (editData,setError)=>{
+  const {
+    firstname,
+    lastname,
+    email,
+    bday,
+    mobile,
+    gender,  
+} = editData;
+
+  const validEmail = isValidEmail(email);
+  const validMonumber = isValidPhonenumber(mobile);
+
+  if (!validEmail) {
+    setError("email", "email is not valid!");
+  }
+
+
+
+  if (!validMonumber) {
+    setError("mobile", "Mobile Number length is 10 digit.");
+  }
+
+  if (firstname === "") {
+    setError("firstname", "fill this field");
+  }
+
+  if (lastname === "") {
+    setError("lastname", "fill this field");
+  }
+
+  if (bday === "") {
+    setError("bday", "Please select the Birthdate");
+  }
+
+  if (gender === "") {
+    setError("gender", "Gender is required");
+  }
+
+  if (validEmail && validMonumber && firstname !== "" && lastname !== "" && gender !== "" && bday !== "") {
+    return true;
+  }
+
+  return false
+}

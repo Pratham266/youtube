@@ -14,8 +14,7 @@ const AcceptBuddyRequest = ({ teamState, decisonOnBuddyRequest }) => {
 
   return (
     <div
-      style={{ height: "350px" }}
-      className="d-flex align-items-center justify-content-center"
+      className="mt-4 d-flex align-items-center justify-content-center"
     >
       {teamState?.loading ? (
         <Loader />

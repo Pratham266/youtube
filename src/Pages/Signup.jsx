@@ -5,6 +5,7 @@ import {
   isValidEmail,
   isValidPassword,
   isValidPhonenumber,
+  validateAllFieldsUser,
 } from "../Js/Validator";
 import ErrorAtEntryField from "../Components/ErrorAtEntryField";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,8 +13,9 @@ import { useDispatch } from "react-redux";
 import { userSignup } from "../redux";
 import { debounce } from "../Js/functionForData";
 import ImageUpload from "../Components/ImageUpload";
+import Loader from "../Components/Loader";
 
-const Signup = ({userSignup}) => {
+const Signup = ({userSignup,userState}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,75 +65,20 @@ const Signup = ({userSignup}) => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+   if(validateAllFieldsUser(signupData,setError,image)){
+     userSignup({ ...signupData, image }, navigate);
+   }
+}
+   
 
-    const {
-      firstname,
-      lastname,
-      email,
-      password,
-      cpassword,
-      bday,
-      mobile,
-      gender,
-    } = signupData;
+  const styleDiv={
+    width: "182px"
+  }
 
-    const validEmail = isValidEmail(email);
-    const validPassword = isValidPassword(password);
-    const validMonumber = isValidPhonenumber(mobile);
-
-    if (!validEmail) {
-      setError("email", "email is not valid!");
-    }
-
-    if (!validPassword) {
-      setError("password", "Create Strong Password");
-    }
-
-    if (!validMonumber) {
-      setError("mobile", "Mobile Number length is 10 digit.");
-    }
-
-    if (firstname === "") {
-      setError("firstname", "fill this field");
-    }
-    if (lastname === "") {
-      setError("lastname", "fill this field");
-    }
-
-    if (cpassword === "") {
-      setError("cpassword", "Confirm Password is required");
-    }
-
-    if (password !== cpassword) {
-      setError("cpassword", "Passwords are not match");
-    }
-    if (bday === "") {
-      setError("bday", "Please select the Birthdate");
-    }
-    if (gender === "") {
-      setError("gender", "Gender is required");
-    }
-
-
-    if (!image) {
-      console.log(image)
-      setError("image", "image is required");
-    }
-    if (
-      validEmail &&
-      validPassword &&
-      validMonumber &&
-      password === cpassword &&
-      firstname !== "" &&
-      lastname !== "" &&
-      gender !== "" &&
-      bday !== "" &&
-      image
-    ) {
-      userSignup({ ...signupData, image }, navigate);
-    }
-  };
-
+  if(userState?.loading){
+    return <Loader/>
+  }
+  
   return (
     <div className="mt-4">
       <div className="col-md-8 mx-auto">
@@ -253,7 +200,7 @@ const Signup = ({userSignup}) => {
 
             <div
               className="p-2 flex-fill bd-highlight"
-              style={{ width: "182px" }}
+              style={styleDiv}
             >
               <div>
 
@@ -284,29 +231,13 @@ const Signup = ({userSignup}) => {
             </div>
           </div>
 
-          {/* <div className="form-group">
-           
-            <label className="form-label mt-4">
-              Upload your Pofile Picture
-            </label>
-            
-            <input
-              className="form-control"
-              type="file"
-              name="image"
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-              }}
-              error={errors.hasOwnProperty("image")}
-            />
 
-          </div> */}
-
-          <ImageUpload setImage={setImage} error={errors.hasOwnProperty("image")}/>
+          <ImageUpload setImage={setImage} clearError={clearError}/>
 
           {errors.hasOwnProperty("image") && (
             <ErrorAtEntryField errorMessage={errors.image} />
           )}
+          
           <div className="mt-4">
             <button
               type="submit"
@@ -319,7 +250,7 @@ const Signup = ({userSignup}) => {
         <div className="mt-2">
           <p>
             Already have an account!
-            <Link to="/login" style={{ fontStyle: "italic" }}>
+            <Link to="/sp/login" className="fst-italic">
               Login Account
             </Link>
           </p>

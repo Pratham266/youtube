@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { cloudNameEnv, uploadPresetEnv } from '../constants';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ImageUpload = ({ setImage, error }) => {
+const ImageUpload = ({ setImage ,clearError}) => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
@@ -14,7 +16,7 @@ const ImageUpload = ({ setImage, error }) => {
             },
             (error, res) => {
                 if (res.event === "success") {
-
+                    clearError('image')
                     setImage(res.info.secure_url)
                 }
                 if (error) {
@@ -25,22 +27,16 @@ const ImageUpload = ({ setImage, error }) => {
     }, [])
 
     return (
-        <div className="form-group">
+        <div className="form-group"  style={{ cursor: 'pointer' }} onClick={(e) => {
+            e.preventDefault();
+            return widgetRef.current.open();
+        }}>
 
             <label className="form-label mt-4">
                 Upload your Pofile Picture
             </label>
 
-            <input
-                className="form-control"
-                type="file"
-                name="image"
-                onClick={(e) => {
-                    e.preventDefault();
-                    return widgetRef.current.open();
-                }}
-                error={error}
-            />
+            <FontAwesomeIcon size='xl' className='mx-4 text-black' icon={faUpload} />
 
         </div>
     )

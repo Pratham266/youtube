@@ -25,12 +25,15 @@ const Navbar = () => {
   const handleSearch = () => {
     debounceGetData(searchRef.current.value);
   };
+  
+  const style={color: "#ffffff",cursor:"pointer"}
+  
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+      <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#6c7175'}}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand text-black" to="/">
             socialpilot
           </Link>
           <button
@@ -47,19 +50,19 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link text-black" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link className="nav-link text-black" to="/about">
                   About
                 </Link>
               </li>
               {user?.user?._id ? (
                 <>
                 <li className="nav-item">
-                <Link className="nav-link" to="/team">
+                <Link className="nav-link text-black" to="/team">
                   Team
                 </Link>
               </li>
@@ -67,7 +70,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/login">
+                    <Link className="nav-link" to="/sp/login">
                       Login
                     </Link>
                   </li>
@@ -80,7 +83,7 @@ const Navbar = () => {
                 <div className="mx-4">
 
                 <input
-                  className="form me-sm-2 text-white"
+                  className="form me-sm-2 text-black"
                   ref={searchRef}
                   onChange={handleSearch}
                   type="search"
@@ -93,7 +96,7 @@ const Navbar = () => {
                   icon={faRightFromBracket}
                   size="xl"
                   onClick={handleLogout}
-                  style={{ color: "#ffffff",cursor:"pointer"}}
+                  style={style}
                   />
                   </div>
               </div>
