@@ -9,7 +9,7 @@ const ErrorPage = () => {
 
           <span className="text-danger">Opps!</span> Page not found.
         </p>
-        <p className="lead">The page you’re looking for doesn’t exist.</p>
+        <p className="lead">The page you're looking for doesn't exist.</p>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { cloudNameEnv, uploadPresetEnv } from '../constants';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ImageUpload = ({ setImage ,clearError}) => {
+const ImageUpload = ({ setImage, clearError }) => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
@@ -17,6 +17,7 @@ const ImageUpload = ({ setImage ,clearError}) => {
             (error, res) => {
                 if (res.event === "success") {
                     clearError('image')
+                    console.log(res.info);
                     setImage(res.info.secure_url)
                 }
                 if (error) {
@@ -27,7 +28,7 @@ const ImageUpload = ({ setImage ,clearError}) => {
     }, [])
 
     return (
-        <div className="form-group pointer_cursor"  onClick={(e) => {
+        <div className="form-group pointer_cursor" onClick={(e) => {
             e.preventDefault();
             return widgetRef.current.open();
         }}>

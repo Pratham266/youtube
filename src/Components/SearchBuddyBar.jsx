@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { addBuddyRequest, getSearchUserData } from '../API/api';
 import { debounce } from '../Js/functionForData';
 import ImageComponent from './ImageComponent';
-import { BackendUrl } from '../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddiesChannels }) => {
-  
+
   const searchRef = useRef(null);
   const [searchUser, setSearchUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-  const [showBuddy,setShowBuddy]= useState(false);
+  const [showBuddy, setShowBuddy] = useState(false);
 
   const getSearchUser = async (searchTerm) => {
     setSearchUser(await getSearchUserData(searchTerm));
@@ -33,8 +32,8 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
   const handleSearchAddBuddy = async (userId) => {
     setLoading(true);
     setSearchUser([]);
-    await addBuddyRequest(userId);
     searchRef.current.value = "";
+    await addBuddyRequest(userId);
     setLoading(false);
   };
 
@@ -55,12 +54,12 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
 
   }
 
- 
+
 
   return (
     <div className="d-flex flex align-items-center md-form form-sm mt-0 p-2 bg-black">
       <div className='w-75 mx-4'>
-        
+
         <form onSubmit={handleSearch}>
           <input
             className="form-control form-control-sm ml-3 w-25 border rounded bg-secondary text-black"
@@ -75,20 +74,20 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
           <div className="dropdown">
             <div
               className=" search_buddy_bar dropdown-menu show border-2"
-              
+
             >
               <div className='d-flex justify-content-between'>
-              <h6 className="dropdown-header text-black"> Buddies</h6>
-              <h6 className="dropdown-header cursor-pointer" onClick={()=>setShowBuddy(!showBuddy)}> <FontAwesomeIcon icon={faXmark}  size="xl" /> </h6>
+                <h6 className="dropdown-header text-black"> Buddies</h6>
+                <h6 className="dropdown-header cursor-pointer" onClick={() => setShowBuddy(!showBuddy)}> <FontAwesomeIcon icon={faXmark} size="xl" /> </h6>
               </div>
-              
+
               <div className="earch_buddy_bar_scroll scrollbar-ripe-malink">
 
                 {searchUser.map((item) => {
                   return (
                     <div
                       key={item.userId}
-                      className="dropdown-item border border-primay cursor-pointer"
+                      className="dropdown-item border border-primay pointer_cursor"
                       onClick={() => handleSearchAddBuddy(item.userId)}
                     >
                       <div className="d-flex">
@@ -122,26 +121,26 @@ const SearchBuddyBar = ({ team, checkedUsers, setCheckedUsers, handleModifyBuddi
       <div>
         <div className="nav-item dropdown">
           <div className="nav-link  show text-white" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onClick={() => setShow(!show)}>{checkedUsers.length === 0 ? "" : checkedUsers.length} Buddies
-          <span className='px-1'>
-          {show ? <FontAwesomeIcon icon={faCaretDown}/>:<FontAwesomeIcon icon={faCaretUp} />}
-          </span>
+            <span className='px-1'>
+              {show ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretUp} />}
+            </span>
           </div>
           {show ? <>
             <div className=" search_buddy_bar_drop_down dropdown-menu show ">
               {team?.map((item) => {
                 return (
 
-                  <div className=' search_buddy_bar_list_card p-1' key={item.userId}>
+                  <div className=' search_buddy_bar_list_card p-1 pointer_cursor' key={item.userId} onChange={() => handleCheckboxChange(item?.userId)}>
 
                     {checkedUsers.includes(item.userId) ?
-                      <input className="form-check-input m-1" type="checkbox" value={item.firstname} id={item.firstname}
-                        onChange={() => handleCheckboxChange(item?.userId)}
+                      <input className="form-check-input m-1 pointer_cursor" type="checkbox" value={item.firstname} id={item.firstname}
+
                         checked
-                      /> : <input className="form-check-input m-1" type="checkbox" value={item.firstname} id={item.firstname}
-                        onChange={() => handleCheckboxChange(item?.userId)}
+                      /> : <input className="form-check-input m-1 pointer_cursor" type="checkbox" value={item.firstname} id={item.firstname}
+
                       />}
 
-                    <label className='text-black' htmlFor={item.firstname}>{item.firstname} {item.lastname}</label>
+                    <label className='text-black pointer_cursor' htmlFor={item.firstname}>{item.firstname} {item.lastname}</label>
                   </div>
                 )
               })}

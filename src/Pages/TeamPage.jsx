@@ -8,29 +8,32 @@ import SearchBuddyBar from "../Components/SearchBuddyBar";
 import SmallLoader from "../Components/SmallLoader";
 import { useNavigate } from "react-router-dom";
 import BuddyChannels from "./BuddyChannels";
+import Pagination from "../Components/Pagination";
 
 
-const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
+const TeamPage = ({ teamState, fetchBuddySubscribedChannels, fetchTeam }) => {
 
   const { team } = teamState;
-  console.log("team",team)
-  const navigate = useNavigate();
+  console.log("team", team)
 
   const [checkedUsers, setCheckedUsers] = useState([]);
-  
-  const handleModifyBuddiesChannels =()=>{
-    fetchBuddySubscribedChannels(checkedUsers)
+  const [page, setPage] = useState(1);
+
+
+  const handleModifyBuddiesChannels = () => {
+    fetchBuddySubscribedChannels(checkedUsers, page)
   }
 
 
   useEffect(() => {
     fetchTeam()
-    fetchBuddySubscribedChannels(checkedUsers)
-  }, []);
+    console.log("checked users : ", checkedUsers)
+    fetchBuddySubscribedChannels(checkedUsers, page)
+  }, [page]);
 
-  
-  if(teamState?.status === 'pending'){
-    return (<Loader/>)
+
+  if (teamState?.status === 'pending') {
+    return (<Loader />)
   }
 
   return (
@@ -39,9 +42,9 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
 
       <div
         className="d-flex justify-content-center team_parent_scroll"
-        
+
       >
-        <div className="w-25 scrollbar-ripe-malinka border-dark m-2 bg-primary rounded team_scroll">
+        <div className="w-25 border-dark m-2 bg-primary rounded">
           {teamState?.loading ? (
             <SmallLoader color={"white"} />
           ) : (
@@ -75,8 +78,11 @@ const TeamPage = ({teamState,fetchBuddySubscribedChannels,fetchTeam}) => {
         </div>
 
         <div className="w-75 border m-2 border-dark rounded bg-primary p-2 team_subscribe_channels">
-           <BuddyChannels team={teamState}/>     
+          <BuddyChannels team={teamState} fetchBuddySubscribedChannels={fetchBuddySubscribedChannels} setPage={setPage} page={teamState?.page} currentPage={page} />
         </div>
+      </div>
+      <div className="mt-4 d-flex justify-content-end">
+        <Pagination setPage={setPage} page={teamState?.page} currentPage={page} />
       </div>
     </>
   );

@@ -3,25 +3,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDataUsingId } from "../Js/filterData";
 import SmallLoader from "./SmallLoader";
 
-const Details = ({youtubeState,subscribeChannel}) => {
+const Details = ({ youtubeState, subscribeChannel }) => {
 
   const { dataId } = useParams();
 
-  // const youtubeState = useSelector((state) => state.youtube);
   const data = getDataUsingId(youtubeState?.data, dataId);
 
   const navigate = useNavigate();
-  
-  // const dispatch= useDispatch()
-  
-  const handleSubscribe=()=>{
+
+
+  const handleSubscribe = () => {
     subscribeChannel(dataId);
     navigate("/")
   }
 
-  
-  if(youtubeState?.loading){
-    return <SmallLoader color={"white"}/>
+
+  if (youtubeState?.loading) {
+    return <SmallLoader color={"white"} />
   }
 
   return (
@@ -49,19 +47,19 @@ const Details = ({youtubeState,subscribeChannel}) => {
                 />
               </div>
 
-        <div className="d-flex  flex-column">
-              <div className="m-4">
-                <h1>Description</h1>
-                <p className="card-text">{data?.description}</p>
-              </div>
-              <div className="m-4">
-                <h1>Subscribers Count</h1>
-                <p className="card-text">{data?.subscribersCount}</p>
-              </div>
+              <div className="d-flex  flex-column">
+                <div className="m-4">
+                  <h1>Description</h1>
+                  <p className="card-text">{data?.description}</p>
+                </div>
+                <div className="m-4">
+                  <h1>Subscribers Count</h1>
+                  <p className="card-text">{data?.subscribersCount}</p>
+                </div>
               </div>
             </div>
             <h3 className="card-header bg-black text-white">
-           
+
               {data?.channelName} &nbsp;
               {data?.isPremium && (
                 <span

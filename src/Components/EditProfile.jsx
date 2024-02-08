@@ -3,8 +3,8 @@ import EntryField from './EntryField'
 import { getCurrentDate, validateAllEditUser } from '../Js/Validator';
 import ErrorAtEntryField from './ErrorAtEntryField';
 
-const EditProfile = ({ data,editUser}) => {
-    const { firstname, lastname, email, gender, mobile, birthdate,} = data
+const EditProfile = ({ data, editUser }) => {
+    const { firstname, lastname, email, gender, mobile, birthdate, } = data
     const [errors, setErrors] = useState({});
 
     const [editData, setEditData] = useState({
@@ -36,7 +36,7 @@ const EditProfile = ({ data,editUser}) => {
 
     const handleUpdateProfile = (e) => {
         e.preventDefault()
-        if(validateAllEditUser(editData,setError)){
+        if (validateAllEditUser(editData, setError)) {
             editUser(editData);
         }
     }

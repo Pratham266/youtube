@@ -9,24 +9,18 @@ import PrivateRoute from "./HOC/withAuth";
 import { useDispatch } from "react-redux";
 import { verifyUser } from "./redux";
 
-import HomeContainer from "./container/HomeContainer";
-import SubscribeChannelsContainer from "./container/SubscribeChannelsContainer";
-import TeamContainer from "./container/TeamContainer";
-import LoginContainer from "./container/LoginContainer";
-import SignupContainer from "./container/SignupContainer";
-import AcceptBuddyRequestContainer from "./container/AcceptBuddyRequestContainer";
 import MainHomePage from "./Pages/MainHomePage";
 import PublicPage from "./Pages/PublicPage";
-import DetailsContainer from "./container/DetailsContainer";
-import DetailsWelcome from "./Components/DetailsWelcome";
 
 const LazyAbout = lazy(() => import('./Pages/About'));
-const LazyHome = lazy(() => import('./Pages/Home'));
-const LazyLogin = lazy(() => import('./Pages/Login'));
-const LazySignup = lazy(() => import('./Pages/Signup'));
-const LazySubscribe = lazy(() => import('./Pages/SubscribeChannels'));
-const LazyTeamPage = lazy(() => import('./Pages/TeamPage'));
-const LazyAcceptBuddy = lazy(() => import('./Pages/AcceptBuddyRequest'));
+const LazyHome = lazy(() => import('./container/HomeContainer'));
+const LazyLogin = lazy(() => import('./container/LoginContainer'));
+const LazySignup = lazy(() => import('./container/SignupContainer'));
+const LazySubscribe = lazy(() => import('./container/SubscribeChannelsContainer'));
+const LazyTeamPage = lazy(() => import('./container/TeamContainer'));
+const LazyAcceptBuddy = lazy(() => import('./container/AcceptBuddyRequestContainer'));
+const LazyDetailsPage = lazy(() => import('./container/DetailsContainer'));
+const LazyDetailsWelcome = lazy(() => import('./Components/DetailsWelcome'));
 
 function App() {
 
@@ -46,23 +40,23 @@ function App() {
 
             <Route path="/" element={<MainHomePage />}>
 
-              <Route exact element={<PrivateRoute><Suspense fallback={<Loader />}><HomeContainer /></Suspense></PrivateRoute>}>
-                <Route exact index element={<Suspense fallback={<Loader />}><DetailsWelcome /></Suspense>} />
-                <Route exact path=":dataId" element={<Suspense fallback={<Loader />}><DetailsContainer /></Suspense>} />
+              <Route exact element={<PrivateRoute><Suspense fallback={<Loader />}><LazyHome /></Suspense></PrivateRoute>}>
+                <Route exact index element={<Suspense fallback={<Loader />}><LazyDetailsWelcome /></Suspense>} />
+                <Route exact path=":dataId" element={<Suspense fallback={<Loader />}><LazyDetailsPage /></Suspense>} />
               </Route>
 
-              <Route exact path="subscibe/channels" element={<PrivateRoute><Suspense fallback={<Loader />}><SubscribeChannelsContainer /></Suspense></PrivateRoute>} />
+              <Route exact path="subscibe/channels" element={<PrivateRoute><Suspense fallback={<Loader />}><LazySubscribe /></Suspense></PrivateRoute>} />
               <Route exact path="about" element={<PrivateRoute><Suspense fallback={<Loader />}><LazyAbout /></Suspense></PrivateRoute>} />
-              <Route exact path="team" element={<PrivateRoute><Suspense fallback={<Loader />}><TeamContainer /></Suspense></PrivateRoute>} />
+              <Route exact path="team" element={<PrivateRoute><Suspense fallback={<Loader />}><LazyTeamPage /></Suspense></PrivateRoute>} />
 
             </Route>
 
 
 
             <Route path="/sp" element={<PublicPage />}>
-              <Route exact path="login" element={<Suspense fallback={<Loader />}><LoginContainer /></Suspense>} />
-              <Route exact path="signup" element={<Suspense fallback={<Loader />}><SignupContainer /></Suspense>} />
-              <Route exact path="accept/invitation/:id" element={<Suspense fallback={<Loader />}><AcceptBuddyRequestContainer /></Suspense>} />
+              <Route exact path="login" element={<Suspense fallback={<Loader />}><LazyLogin /></Suspense>} />
+              <Route exact path="signup" element={<Suspense fallback={<Loader />}><LazySignup /></Suspense>} />
+              <Route exact path="accept/invitation/:id" element={<Suspense fallback={<Loader />}><LazyAcceptBuddy /></Suspense>} />
             </Route>
 
 

@@ -7,8 +7,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchBuddySubscribedChannels: (data) => {
-    dispatch(fetchBuddySubscribedChannels(data));
+  fetchBuddySubscribedChannels: (data, page) => {
+    dispatch(fetchBuddySubscribedChannels(data, page));
   },
   fetchTeam: () => {
     dispatch(fetchTeam());

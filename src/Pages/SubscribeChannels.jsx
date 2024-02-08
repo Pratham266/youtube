@@ -8,8 +8,8 @@ import { faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
 const SubscribeChannels = (props) => {
   const { subscribedchannels } = props.userState;
 
-  const [page, setPage] = useState(1);
   const [filter, setFilter] = useState({ name: 'asc', subscribers: 'desc' })
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     props.getSubscribedData(page, filter.name, filter.subscribers);
@@ -37,14 +37,13 @@ const SubscribeChannels = (props) => {
       parameter: 'subscribersCount'
     },
     {
-      label: '',
+      label: 'unsubscribe',
       sortable: false
     }
   ];
 
 
   const handelFilter = (fieldname) => {
-
     if (fieldname === 'channelName') {
       let setOrder = filter.name === 'asc' ? 'desc' : 'asc';
       setFilter((prev) => ({ ...prev, name: setOrder }))
@@ -55,7 +54,6 @@ const SubscribeChannels = (props) => {
       setFilter((prev) => ({ ...prev, subscribers: setOrder }))
     }
   }
-
 
   const getIcons = (label, filter) => {
 

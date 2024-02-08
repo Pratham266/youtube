@@ -12,7 +12,6 @@ const Bell = ({ dataId }) => {
     }, 1000);
   };
 
-
   return (
     <>
       {bell ? (
@@ -20,13 +19,13 @@ const Bell = ({ dataId }) => {
           icon={faBell}
           shake
           className="bell_icon_befor"
-         
+
         />
       ) : (
         <FontAwesomeIcon
           icon={faBell}
           className="bell_icon_after"
-          
+
           onClick={() => {
             handleBell(dataId);
           }}

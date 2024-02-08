@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 class ListDataClass extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +21,7 @@ class ListDataClass extends React.Component {
             if (scrollTop + clientHeight + 2 >= scrollHeight) {
                 this.setState((prevState) => ({
                     page: prevState.page + 1,
-                }))
+                }));
             }
         } catch (error) {
             console.log("error :", error);
@@ -30,36 +29,42 @@ class ListDataClass extends React.Component {
     };
 
     componentDidMount() {
-        this.props.fetchYoutube(this.state.page)
+        this.props.fetchYoutube(this.state.page);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { userState, fetchYoutube } = this.props;
 
-        if (prevState.page !== this.state.page || prevProps.userState?.user?.isPremium !== userState?.user?.isPremium) {
-            fetchYoutube(this.state.page)
+        if (
+            prevState.page !== this.state.page ||
+            prevProps.userState?.user?.isPremium !== userState?.user?.isPremium
+        ) {
+            fetchYoutube(this.state.page);
         }
 
-        if(prevProps.userState?.user?.isPremium !== userState?.user?.isPremium){
+        if (prevProps.userState?.user?.isPremium !== userState?.user?.isPremium) {
             this.setState((prevState) => ({
                 page: 1,
-            }))
+            }));
         }
 
-        this.scrollDiv.current.addEventListener("scroll", this.handleInfiniteScroll);
+        this.scrollDiv.current.addEventListener(
+            "scroll",
+            this.handleInfiniteScroll
+        );
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         if (this.scrollDiv && this.scrollDiv.current) {
-            this.scrollDiv.current.removeEventListener("scroll", this.handleInfiniteScroll);
-          }
+            this.scrollDiv.current.removeEventListener(
+                "scroll",
+                this.handleInfiniteScroll
+            );
+        }
     }
 
     render() {
-
-        const {youtubeState,navigate,dataId} = this.props;
-
-     
+        const { youtubeState, navigate, dataId } = this.props;
 
         if (!youtubeState?.data) {
             console.log("in loader");
@@ -79,12 +84,12 @@ class ListDataClass extends React.Component {
 
                 {youtubeState?.data.map((item, index) => {
                     return (
-                        <div key={item.channelId} onClick={() => navigate(`/${item.channelId}`)}>
+                        <div
+                            key={item.channelId}
+                            onClick={() => navigate(`/${item.channelId}`)}
+                        >
                             <div
-                                className={` list_page_card card text-white  rounded border-white m-2 ${item.channelId === dataId ? "bg-dark" : "bg-black"
-                                    }`}
-                                
-                            >
+                                className={`list_page_card card text-white rounded border-white m-2 ${item.channelId === dataId ? "bg-dark" : "bg-black"}`}>
                                 <div className="d-flex ">
                                     <ImageComponent
                                         src={item.avatarImage}
@@ -95,10 +100,9 @@ class ListDataClass extends React.Component {
                                         {item.channelName} &nbsp;
                                         {item.isPremium && (
                                             <FontAwesomeIcon
-                                            className="list_page_card_icon"
+                                                className="list_page_card_icon"
                                                 icon={faStar}
                                                 beat
-                                                
                                             />
                                         )}
                                     </div>
@@ -115,10 +119,7 @@ class ListDataClass extends React.Component {
     }
 }
 
-
 export default ListDataClass;
-
-
 
 /*
 
@@ -141,4 +142,3 @@ update a sorting fun. using backend api in channel name default32e asc: and in c
 create a differrnt component  name TableHeade in table. ---> done
 
 */
-
